@@ -7,7 +7,7 @@ public class RunState : MovementState
         base.Enter();
 
         MovementController.Instance.MovementSpeed = MovementController.Instance.RunSpeed;
-        LookController.Instance.RunCamera.enabled = true;
+        CameraController.Instance.RunCamera.enabled = true;
     }
 
     public override void Update()
@@ -20,6 +20,6 @@ public class RunState : MovementState
     {
         base.Exit();
 
-        LookController.Instance.RunCamera.enabled = false;
+        CameraController.Instance.RunCamera.enabled = false;
     }
 }

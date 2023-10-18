@@ -2,7 +2,7 @@ using Cinemachine;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController), typeof(InputManager))]
-public class LookController : SingletonMono<LookController>
+public class CameraController : SingletonMono<CameraController>
 {
     [SerializeField] private Camera _mainCamera;
 
@@ -21,4 +21,11 @@ public class LookController : SingletonMono<LookController>
     public CinemachineVirtualCamera AirCamera { get => _airCamera; }
 
     #endregion
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 }

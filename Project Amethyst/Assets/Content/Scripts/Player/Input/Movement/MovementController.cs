@@ -4,6 +4,8 @@ using UnityEngine;
 public class MovementController : SingletonMono<MovementController>
 {
     private CharacterController _controller;
+    private InputManager _inputManager;
+    private CameraController _cameraController;
     private Vector3 _fallVelocity;
 
     [SerializeField] private float _walkSpeed = 2f;
@@ -16,6 +18,8 @@ public class MovementController : SingletonMono<MovementController>
     public float MovementSpeed { get; set; }
     public float WalkSpeed { get { return _walkSpeed; } }
     public float RunSpeed { get { return _runSpeed; } }
+
+    #region Properties
 
     public bool CheckGround
     {
@@ -33,29 +37,27 @@ public class MovementController : SingletonMono<MovementController>
         }
     }
 
+    #endregion
+
     protected override void Awake()
     {
         base.Awake();
-        
+
         _controller = GetComponent<CharacterController>();
+        _inputManager = GetComponent<InputManager>();
+        _cameraController = GetComponent<CameraController>();
     }
 
-    private void Update()
+    public void Move()
     {
-        Move();
-        ApplyGravity();
-    }
-
-    private void Move()
-    {
-        Vector3 move = new Vector3(InputManager.Instance.GetPlayerWalk().x, 0f, InputManager.Instance.GetPlayerWalk().y);
-        _orientation.eulerAngles = new Vector3(0f, LookController.Instance.MainCamera.transform.localEulerAngles.y, 0f);
+        Vector3 move = new Vector3(_inputManager.GetPlayerWalk().x, 0f, _inputManager.GetPlayerWalk().y);
+        _orientation.eulerAngles = new Vector3(0f, _cameraController.MainCamera.transform.localEulerAngles.y, 0f);
         move = (_orientation.forward * move.z + _orientation.right * move.x).normalized;
 
         _controller.Move(MovementSpeed * Time.deltaTime * move);
     }
 
-    private void ApplyGravity()
+    public void ApplyGravity()
     {
         _fallVelocity.y += Physics.gravity.y * Time.deltaTime;
         _controller.Move(_fallVelocity * Time.deltaTime);

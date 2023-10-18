@@ -4,7 +4,7 @@ public class IdleState : MovementState
     {
         base.Enter();
 
-        LookController.Instance.IdleCamera.enabled = true;
+        CameraController.Instance.IdleCamera.enabled = true;
     }
 
     public override void Update()
@@ -18,6 +18,6 @@ public class IdleState : MovementState
     {
         base.Exit();
 
-        LookController.Instance.IdleCamera.enabled = false;
+        CameraController.Instance.IdleCamera.enabled = false;
     }
 }

@@ -7,6 +7,9 @@ public abstract class MovementState : IState
 
     public virtual void Update()
     {
+        MovementController.Instance.Move();
+        MovementController.Instance.ApplyGravity();
+
         MovementStateMachine.Instance.CheckIfJumping();
     }
 

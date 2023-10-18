@@ -7,7 +7,7 @@ public class WalkState : MovementState
         base.Enter();
 
         MovementController.Instance.MovementSpeed = MovementController.Instance.WalkSpeed;
-        LookController.Instance.WalkCamera.enabled = true;
+        CameraController.Instance.WalkCamera.enabled = true;
     }
 
     public override void Update()
@@ -21,6 +21,6 @@ public class WalkState : MovementState
     {
         base.Exit();
 
-        LookController.Instance.WalkCamera.enabled = false;
+        CameraController.Instance.WalkCamera.enabled = false;
     }
 }

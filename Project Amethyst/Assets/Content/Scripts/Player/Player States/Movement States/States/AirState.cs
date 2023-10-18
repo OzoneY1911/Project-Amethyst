@@ -5,11 +5,13 @@ public class AirState : MovementState
         base.Enter();
 
         MovementController.Instance.Jump();
-        LookController.Instance.AirCamera.enabled = true;
+        CameraController.Instance.AirCamera.enabled = true;
     }
 
     public override void Update()
     {
+        base.Update();
+
         MovementStateMachine.Instance.CheckIfLanded();
     }
 
@@ -17,6 +19,6 @@ public class AirState : MovementState
     {
         base.Exit();
 
-        LookController.Instance.AirCamera.enabled = false;
+        CameraController.Instance.AirCamera.enabled = false;
     }
 }
