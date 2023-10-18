@@ -57,6 +57,11 @@ public class MovementController : SingletonMono<MovementController>
         _controller.Move(MovementSpeed * Time.deltaTime * move);
     }
 
+    public void Jump()
+    {
+        _fallVelocity.y += Mathf.Sqrt(_jumpHeight * -_jumpStrength * Physics.gravity.y);
+    }
+
     public void ApplyGravity()
     {
         _fallVelocity.y += Physics.gravity.y * Time.deltaTime;
@@ -66,10 +71,5 @@ public class MovementController : SingletonMono<MovementController>
         {
             _fallVelocity.y = 0f;
         }
-    }
-
-    public void Jump()
-    {
-        _fallVelocity.y += Mathf.Sqrt(_jumpHeight * -_jumpStrength * Physics.gravity.y);
     }
 }
