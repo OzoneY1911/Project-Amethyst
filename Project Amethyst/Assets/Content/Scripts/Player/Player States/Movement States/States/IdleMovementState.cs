@@ -1,4 +1,4 @@
-public class IdleState : MovementState
+public class IdleMovementState : MovementState
 {
     public override void Enter()
     {

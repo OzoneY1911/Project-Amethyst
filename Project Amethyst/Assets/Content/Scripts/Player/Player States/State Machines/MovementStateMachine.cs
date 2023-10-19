@@ -16,10 +16,10 @@ public class MovementStateMachine : SingletonMono<MovementStateMachine>, IStateM
 
     private MovementStateMachine()
     {
-        Idle = new IdleState();
-        Walk = new WalkState();
-        Run = new RunState();
-        Air = new AirState();
+        Idle = new IdleMovementState();
+        Walk = new WalkMovementState();
+        Run = new RunMovementState();
+        Air = new AirMovementState();
     }
 
     protected override void Awake()
@@ -42,13 +42,13 @@ public class MovementStateMachine : SingletonMono<MovementStateMachine>, IStateM
         }
     }
 
-    public void Init(IState initialState)
+    public void Init(in IState initialState)
     {
         CurrentState = initialState;
         initialState.Enter();
     }
 
-    public void TransitionTo(IState nextState)
+    public void TransitionTo(in IState nextState)
     {
         CurrentState.Exit();
         CurrentState = nextState;

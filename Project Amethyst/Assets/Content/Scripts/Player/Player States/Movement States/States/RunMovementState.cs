@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class RunState : MovementState
+public class RunMovementState : MovementState
 {
     public override void Enter()
     {

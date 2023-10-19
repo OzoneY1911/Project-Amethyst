@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class WalkState : MovementState
+public class WalkMovementState : MovementState
 {
     public override void Enter()
     {
