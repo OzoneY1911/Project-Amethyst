@@ -4,6 +4,8 @@ public class InputManager : SingletonMono<InputManager>
 {
     private PlayerControls _playerControls;
 
+    #region Basic Methods
+
     protected override void Awake()
     {
         base.Awake();
@@ -26,6 +28,10 @@ public class InputManager : SingletonMono<InputManager>
         _playerControls.Dispose();
     }
 
+    #endregion
+
+    #region Movement Input
+
     public Vector2 GetPlayerWalk()
     {
         return _playerControls.Player.Walk.ReadValue<Vector2>();
@@ -45,4 +51,21 @@ public class InputManager : SingletonMono<InputManager>
     {
         return _playerControls.Player.Look.ReadValue<Vector2>();
     }
+
+    #endregion
+
+    #region Weapon Input
+
+    public bool GetPlayerShot()
+    {
+        return _playerControls.Player.Shot.IsPressed();
+    }
+
+    public bool GetPlayerReload()
+    {
+        return _playerControls.Player.Reload.IsPressed();
+    }
+
+    #endregion
+
 }
