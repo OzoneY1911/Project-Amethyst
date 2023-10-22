@@ -80,6 +80,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DrawPistol"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8638fbd-f92d-44b7-b899-fafe4bb6c5c7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DrawShotgun"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e1e1474-a6ee-4fd9-9668-0ede42c92e72"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DrawRifle"",
+                    ""type"": ""Button"",
+                    ""id"": ""e8c39586-b180-44e7-8073-ad3918ade88b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +219,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47d34d2f-e862-4057-926e-7d961521acbb"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DrawPistol"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""931095c0-67fe-4a9e-9509-d7d4f34d4fcb"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DrawShotgun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b7a2a4e-3c2f-4c43-b8b4-116d3d69e0d8"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DrawRifle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +266,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Shot = m_Player.FindAction("Shot", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
+        m_Player_DrawPistol = m_Player.FindAction("DrawPistol", throwIfNotFound: true);
+        m_Player_DrawShotgun = m_Player.FindAction("DrawShotgun", throwIfNotFound: true);
+        m_Player_DrawRifle = m_Player.FindAction("DrawRifle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +336,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Shot;
     private readonly InputAction m_Player_Reload;
+    private readonly InputAction m_Player_DrawPistol;
+    private readonly InputAction m_Player_DrawShotgun;
+    private readonly InputAction m_Player_DrawRifle;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -283,6 +349,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Shot => m_Wrapper.m_Player_Shot;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
+        public InputAction @DrawPistol => m_Wrapper.m_Player_DrawPistol;
+        public InputAction @DrawShotgun => m_Wrapper.m_Player_DrawShotgun;
+        public InputAction @DrawRifle => m_Wrapper.m_Player_DrawRifle;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -310,6 +379,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
+            @DrawPistol.started += instance.OnDrawPistol;
+            @DrawPistol.performed += instance.OnDrawPistol;
+            @DrawPistol.canceled += instance.OnDrawPistol;
+            @DrawShotgun.started += instance.OnDrawShotgun;
+            @DrawShotgun.performed += instance.OnDrawShotgun;
+            @DrawShotgun.canceled += instance.OnDrawShotgun;
+            @DrawRifle.started += instance.OnDrawRifle;
+            @DrawRifle.performed += instance.OnDrawRifle;
+            @DrawRifle.canceled += instance.OnDrawRifle;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -332,6 +410,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
+            @DrawPistol.started -= instance.OnDrawPistol;
+            @DrawPistol.performed -= instance.OnDrawPistol;
+            @DrawPistol.canceled -= instance.OnDrawPistol;
+            @DrawShotgun.started -= instance.OnDrawShotgun;
+            @DrawShotgun.performed -= instance.OnDrawShotgun;
+            @DrawShotgun.canceled -= instance.OnDrawShotgun;
+            @DrawRifle.started -= instance.OnDrawRifle;
+            @DrawRifle.performed -= instance.OnDrawRifle;
+            @DrawRifle.canceled -= instance.OnDrawRifle;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -357,5 +444,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnShot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnDrawPistol(InputAction.CallbackContext context);
+        void OnDrawShotgun(InputAction.CallbackContext context);
+        void OnDrawRifle(InputAction.CallbackContext context);
     }
 }

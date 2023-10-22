@@ -11,7 +11,9 @@ public class IdleWeaponState : WeaponState
     {
         base.Update();
 
-        WeaponStateMachine.Instance.CheckIfShooting();
+        _weaponStateMachine.CheckIfShooting();
+        _weaponStateMachine.CheckIfReloading();
+        _weaponStateMachine.CheckIfSwapping();
     }
 
     public override void Exit()

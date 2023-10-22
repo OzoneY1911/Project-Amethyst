@@ -4,10 +4,10 @@ public class MovementStateMachine : SingletonMono<MovementStateMachine>, IStateM
 {
     public IState CurrentState { get; private set; }
 
-    public IState Idle;
-    public IState Walk;
-    public IState Run;
-    public IState Air;
+    public IState MovementIdle;
+    public IState MovementWalk;
+    public IState MovementRun;
+    public IState MovementAir;
 
     // FOR TESTING
     #if UNITY_EDITOR
@@ -16,17 +16,17 @@ public class MovementStateMachine : SingletonMono<MovementStateMachine>, IStateM
 
     private MovementStateMachine()
     {
-        Idle = new IdleMovementState();
-        Walk = new WalkMovementState();
-        Run = new RunMovementState();
-        Air = new AirMovementState();
+        MovementIdle = new IdleMovementState();
+        MovementWalk = new WalkMovementState();
+        MovementRun = new RunMovementState();
+        MovementAir = new AirMovementState();
     }
 
     protected override void Awake()
     {
         base.Awake();
 
-        Init(Idle);
+        Init(MovementIdle);
     }
 
     private void Update()
@@ -57,17 +57,17 @@ public class MovementStateMachine : SingletonMono<MovementStateMachine>, IStateM
 
     public void OnDestroy()
     {
-        Idle = null;
-        Walk = null;
-        Run = null;
-        Air = null;
+        MovementIdle = null;
+        MovementWalk = null;
+        MovementRun = null;
+        MovementAir = null;
     }
 
     public void CheckIfIdle()
     {
         if (InputManager.Instance.GetPlayerWalk() == Vector2.zero)
         {
-            TransitionTo(Idle);
+            TransitionTo(MovementIdle);
         }
     }
 
@@ -75,7 +75,7 @@ public class MovementStateMachine : SingletonMono<MovementStateMachine>, IStateM
     {
         if (InputManager.Instance.GetPlayerWalk() != Vector2.zero)
         {
-            TransitionTo(Walk);
+            TransitionTo(MovementWalk);
         }
     }
 
@@ -83,7 +83,7 @@ public class MovementStateMachine : SingletonMono<MovementStateMachine>, IStateM
     {
         if (InputManager.Instance.GetPlayerRun() && InputManager.Instance.GetPlayerWalk() != Vector2.zero)
         {
-            TransitionTo(Run);
+            TransitionTo(MovementRun);
         }
     }
 
@@ -91,7 +91,7 @@ public class MovementStateMachine : SingletonMono<MovementStateMachine>, IStateM
     {
         if (!InputManager.Instance.GetPlayerRun() || InputManager.Instance.GetPlayerWalk() == Vector2.zero)
         {
-            TransitionTo(Walk);
+            TransitionTo(MovementWalk);
         }
     }
 
@@ -99,7 +99,7 @@ public class MovementStateMachine : SingletonMono<MovementStateMachine>, IStateM
     {
         if (MovementController.Instance.CheckGround && InputManager.Instance.GetPlayerJump())
         {
-            TransitionTo(Air);
+            TransitionTo(MovementAir);
         }
     }
 

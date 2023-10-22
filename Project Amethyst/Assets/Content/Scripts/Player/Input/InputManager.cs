@@ -56,14 +56,34 @@ public class InputManager : SingletonMono<InputManager>
 
     #region Weapon Input
 
-    public bool GetPlayerShot()
+    public bool GetPlayerShot(in bool isAutomatic)
     {
-        return _playerControls.Player.Shot.IsPressed();
+        if (isAutomatic)
+        {
+            return _playerControls.Player.Shot.IsPressed();
+        }
+        else
+        {
+            return _playerControls.Player.Shot.triggered;
+        }
     }
 
     public bool GetPlayerReload()
     {
         return _playerControls.Player.Reload.IsPressed();
+    }
+
+    public bool GetPlayerDrawPistol()
+    {
+        return _playerControls.Player.DrawPistol.triggered;
+    }
+    public bool GetPlayerDrawShotgun()
+    {
+        return _playerControls.Player.DrawShotgun.triggered;
+    }
+    public bool GetPlayerDrawRifle()
+    {
+        return _playerControls.Player.DrawRifle.triggered;
     }
 
     #endregion

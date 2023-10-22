@@ -4,20 +4,20 @@ public class RunMovementState : MovementState
     {
         base.Enter();
 
-        MovementController.Instance.MovementSpeed = MovementController.Instance.RunSpeed;
-        CameraController.Instance.RunCamera.enabled = true;
+        _movementController.MovementSpeed = _movementController.RunSpeed;
+        _cameraController.RunCamera.enabled = true;
     }
 
     public override void Update()
     {
         base.Update();
 
-        MovementStateMachine.Instance.CheckIfNotRunning();
+        _movementStateMachine.CheckIfNotRunning();
     }
     public override void Exit()
     {
         base.Exit();
 
-        CameraController.Instance.RunCamera.enabled = false;
+        _cameraController.RunCamera.enabled = false;
     }
 }

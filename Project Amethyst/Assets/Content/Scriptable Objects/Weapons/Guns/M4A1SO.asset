@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b8ac3003021c841bae85f2347efd63, type: 3}
+  m_Name: M4A1SO
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 4654325466243622753, guid: 8e562b1aaf79fab4199df9eb32184d60, type: 3}
+  Name: M4A1
+  Type: 2
+  IsAutomatic: 1
+  Damage: 30
+  Rate: 800
+  Range: 10
+  ReloadTime: 3
+  MagazineSize: 30
+  DefaultReserve: 90
+  MaxReserve: 180
+  CurrentRounds: 0
+  CurrentReserve: 0
+  CanShoot: 1

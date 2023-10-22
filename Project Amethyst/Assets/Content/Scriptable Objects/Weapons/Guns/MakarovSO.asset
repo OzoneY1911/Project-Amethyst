@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b8ac3003021c841bae85f2347efd63, type: 3}
+  m_Name: MakarovSO
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 4389059357211778105, guid: 3ba2d02a766323b42bb42672886281ef, type: 3}
+  Name: Makarov
+  Type: 0
+  IsAutomatic: 0
+  Damage: 50
+  Rate: 400
+  Range: 10
+  ReloadTime: 3
+  MagazineSize: 8
+  DefaultReserve: 32
+  MaxReserve: 64
+  CurrentRounds: 0
+  CurrentReserve: 0
+  CanShoot: 1

@@ -4,21 +4,21 @@ public class AirMovementState : MovementState
     {
         base.Enter();
 
-        MovementController.Instance.Jump();
-        CameraController.Instance.AirCamera.enabled = true;
+        _movementController.Jump();
+        _cameraController.AirCamera.enabled = true;
     }
 
     public override void Update()
     {
         base.Update();
 
-        MovementStateMachine.Instance.CheckIfLanded();
+        _movementStateMachine.CheckIfLanded();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        CameraController.Instance.AirCamera.enabled = false;
+        _cameraController.AirCamera.enabled = false;
     }
 }

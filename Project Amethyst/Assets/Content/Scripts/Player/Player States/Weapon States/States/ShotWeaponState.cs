@@ -4,14 +4,14 @@ public class ShotWeaponState : WeaponState
     {
         base.Enter();
 
-
+        _weaponController.Shoot();
     }
 
     public override void Update()
     {
         base.Update();
 
-        WeaponStateMachine.Instance.CheckIfShooting();
+        _weaponStateMachine.CheckIfShooting();
     }
 
     public override void Exit()

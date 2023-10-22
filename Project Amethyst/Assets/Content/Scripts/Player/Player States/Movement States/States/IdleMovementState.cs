@@ -4,20 +4,20 @@ public class IdleMovementState : MovementState
     {
         base.Enter();
 
-        CameraController.Instance.IdleCamera.enabled = true;
+        _cameraController.IdleCamera.enabled = true;
     }
 
     public override void Update()
     {
         base.Update();
 
-        MovementStateMachine.Instance.CheckIfWalking();
+        _movementStateMachine.CheckIfWalking();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        CameraController.Instance.IdleCamera.enabled = false;
+        _cameraController.IdleCamera.enabled = false;
     }
 }
