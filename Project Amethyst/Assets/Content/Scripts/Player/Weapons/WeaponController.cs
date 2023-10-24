@@ -9,6 +9,10 @@ public class WeaponController : SingletonMono<WeaponController>
     private Coroutine _reloadCoroutine;
     private bool _reloading;
 
+    #region Shooting
+
+    // SHOOTING
+
     public void Shoot()
     {
         _currentWeapon.CurrentRounds--;
@@ -16,7 +20,10 @@ public class WeaponController : SingletonMono<WeaponController>
         RaycastHit hit;
         if (Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out hit, _currentWeapon.Range))
         {
-            
+            if (hit.collider.tag == "Enemy")
+            {
+                hit.collider.GetComponent<EnemyHealth>().ChangeHealth(-_currentWeapon.Damage);
+            }
         }
 
         StartCoroutine(ShootCooldown());
@@ -30,6 +37,12 @@ public class WeaponController : SingletonMono<WeaponController>
 
         _currentWeapon.CanShoot = true;
     }
+
+    #endregion
+
+    #region Reloading
+
+    // RELOADING
 
     public void Reload()
     {
@@ -53,11 +66,10 @@ public class WeaponController : SingletonMono<WeaponController>
 
         yield return new WaitForSeconds(_currentWeapon.ReloadTime);
         
-        var roundsNeeded = _currentWeapon.MagazineSize - _currentWeapon.CurrentRounds;
-        if (_currentWeapon.CurrentRounds >= _currentWeapon.CurrentReserve)
+        if (_currentWeapon.MagazineSize - _currentWeapon.CurrentRounds <= _currentWeapon.CurrentReserve)
         {
-            _currentWeapon.CurrentRounds += roundsNeeded;
-            _currentWeapon.CurrentReserve -= roundsNeeded;
+            _currentWeapon.CurrentReserve -= _currentWeapon.MagazineSize - _currentWeapon.CurrentRounds;
+            _currentWeapon.CurrentRounds = _currentWeapon.MagazineSize;
         }
         else
         {
@@ -68,4 +80,6 @@ public class WeaponController : SingletonMono<WeaponController>
         _currentWeapon.CanShoot = true;
         _reloading = false;
     }
+
+    #endregion
 }

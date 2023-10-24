@@ -37,6 +37,10 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
         Equip(CurrentShotgun, _shotgunHolder, out ShotgunObject);
         CurrentRifle = _rifleList[0];
         Equip(CurrentRifle, _rifleHolder, out RifleObject);
+
+        CurrentPistol.CurrentReserve = CurrentPistol.DefaultReserve;
+        CurrentShotgun.CurrentReserve = CurrentShotgun.DefaultReserve;
+        CurrentRifle.CurrentReserve = CurrentRifle.DefaultReserve;
     }
 
     public void Equip(in WeaponSO gun, in Transform holder, out GameObject gunObject)

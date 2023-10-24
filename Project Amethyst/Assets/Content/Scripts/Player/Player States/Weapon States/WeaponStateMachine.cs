@@ -88,7 +88,7 @@ public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachi
     {
         if (_inputManager.GetPlayerReload())
         {
-            if (_currentWeapon.CurrentReserve > 0)
+            if (_currentWeapon.CurrentRounds < _currentWeapon.MagazineSize && _currentWeapon.CurrentReserve > 0)
             {
                 TransitionTo(WeaponReload);
             }

@@ -28,6 +28,7 @@ public class WeaponSO : ScriptableObject
     public int MagazineSize;
     public int DefaultReserve;
     public int MaxReserve;
+
     [HideInInspector] public int CurrentRounds;
     [HideInInspector] public int CurrentReserve;
     [HideInInspector] public bool CanShoot = true;
