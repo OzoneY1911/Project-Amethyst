@@ -17,6 +17,7 @@ public class WeaponSO : ScriptableObject
     public string Name;
     public WeaponType Type;
     public bool IsAutomatic;
+    public bool RoundInChamber;
 
     [Header("Main Stats")]
     public int Damage;

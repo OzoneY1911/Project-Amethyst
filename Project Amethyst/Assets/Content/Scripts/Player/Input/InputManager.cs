@@ -44,7 +44,7 @@ public class InputManager : SingletonMono<InputManager>
 
     public bool GetPlayerJump()
     {
-        return _playerControls.Player.Jump.triggered;
+        return _playerControls.Player.Jump.WasPressedThisFrame();
     }
 
     public Vector2 GetPlayerLook()
@@ -64,7 +64,7 @@ public class InputManager : SingletonMono<InputManager>
         }
         else
         {
-            return _playerControls.Player.Shot.triggered;
+            return _playerControls.Player.Shot.WasPressedThisFrame();
         }
     }
 
@@ -75,17 +75,16 @@ public class InputManager : SingletonMono<InputManager>
 
     public bool GetPlayerDrawPistol()
     {
-        return _playerControls.Player.DrawPistol.triggered;
+        return _playerControls.Player.DrawPistol.WasPressedThisFrame();
     }
     public bool GetPlayerDrawShotgun()
     {
-        return _playerControls.Player.DrawShotgun.triggered;
+        return _playerControls.Player.DrawShotgun.WasPressedThisFrame();
     }
     public bool GetPlayerDrawRifle()
     {
-        return _playerControls.Player.DrawRifle.triggered;
+        return _playerControls.Player.DrawRifle.WasPressedThisFrame();
     }
 
     #endregion
-
 }

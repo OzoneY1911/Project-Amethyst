@@ -33,6 +33,8 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
         Equip(CurrentPistol, _pistolHolder, out PistolObject);
         Draw(CurrentPistol, PistolObject);
 
+        // TEST
+
         CurrentShotgun = _shotgunList[0];
         Equip(CurrentShotgun, _shotgunHolder, out ShotgunObject);
         CurrentRifle = _rifleList[0];

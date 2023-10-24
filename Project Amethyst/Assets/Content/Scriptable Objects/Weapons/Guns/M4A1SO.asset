@@ -16,6 +16,7 @@ MonoBehaviour:
   Name: M4A1
   Type: 2
   IsAutomatic: 1
+  RoundInChamber: 1
   Damage: 30
   Rate: 800
   Range: 10
@@ -24,5 +25,5 @@ MonoBehaviour:
   DefaultReserve: 90
   MaxReserve: 180
   CurrentRounds: 0
-  CurrentReserve: 0
+  CurrentReserve: 90
   CanShoot: 1

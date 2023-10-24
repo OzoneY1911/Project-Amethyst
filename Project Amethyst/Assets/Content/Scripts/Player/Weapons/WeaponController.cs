@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Timers;
 using UnityEngine;
 
 public class WeaponController : SingletonMono<WeaponController>
@@ -65,11 +66,21 @@ public class WeaponController : SingletonMono<WeaponController>
         _currentWeapon.CanShoot = false;
 
         yield return new WaitForSeconds(_currentWeapon.ReloadTime);
-        
-        if (_currentWeapon.MagazineSize - _currentWeapon.CurrentRounds <= _currentWeapon.CurrentReserve)
+
+        var roundsLacking = _currentWeapon.MagazineSize - _currentWeapon.CurrentRounds;
+
+        if (roundsLacking <= _currentWeapon.CurrentReserve)
         {
-            _currentWeapon.CurrentReserve -= _currentWeapon.MagazineSize - _currentWeapon.CurrentRounds;
-            _currentWeapon.CurrentRounds = _currentWeapon.MagazineSize;
+            if (_currentWeapon.CurrentRounds != 0 && _currentWeapon.RoundInChamber)
+            {
+                _currentWeapon.CurrentReserve -= roundsLacking + 1;
+                _currentWeapon.CurrentRounds = _currentWeapon.MagazineSize + 1;
+            }
+            else
+            {
+                _currentWeapon.CurrentReserve -= roundsLacking;
+                _currentWeapon.CurrentRounds = _currentWeapon.MagazineSize;
+            }
         }
         else
         {
