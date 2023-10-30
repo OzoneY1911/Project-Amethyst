@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class RunMovementState : MovementState
 {
     public override void Enter()
@@ -13,6 +15,8 @@ public class RunMovementState : MovementState
         base.Update();
 
         _movementStateMachine.CheckIfNotRunning();
+
+        _weaponSelector.CurrentWeaponObject.GetComponent<Animator>().SetFloat("Movement Blend", 1f, .5f, Time.deltaTime);
     }
     public override void Exit()
     {

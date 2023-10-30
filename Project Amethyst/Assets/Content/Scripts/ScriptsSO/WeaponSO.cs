@@ -1,3 +1,4 @@
+using UnityEditor.Animations;
 using UnityEngine;
 
 public enum WeaponType
@@ -29,6 +30,23 @@ public class WeaponSO : ScriptableObject
     public int MagazineSize;
     public int DefaultReserve;
     public int MaxReserve;
+
+    [Header("Animation")]
+    public AnimationClip AnimDraw;
+    public AnimationClip AnimIdle;
+    public AnimationClip AnimWalk;
+    public AnimationClip AnimRun;
+    public AnimationClip AnimShot;
+    public AnimationClip AnimReloadPart;
+    public AnimationClip AnimReloadFull;
+    public AnimationClip AnimJump;
+    public AnimationClip AnimFall;
+    public AnimationClip AnimLand;
+
+    [Header("Animation Time")]
+    public float TimeDraw;
+    public float TimeReloadPart;
+    public float TimeReloadFull;
 
     [HideInInspector] public int CurrentRounds;
     [HideInInspector] public int CurrentReserve;

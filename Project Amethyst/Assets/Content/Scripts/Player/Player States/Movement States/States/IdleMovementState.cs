@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class IdleMovementState : MovementState
 {
     public override void Enter()
@@ -12,6 +14,8 @@ public class IdleMovementState : MovementState
         base.Update();
 
         _movementStateMachine.CheckIfWalking();
+
+        _weaponSelector.CurrentWeaponObject.GetComponent<Animator>().SetFloat("Movement Blend", 0f, .25f, Time.deltaTime);
     }
 
     public override void Exit()

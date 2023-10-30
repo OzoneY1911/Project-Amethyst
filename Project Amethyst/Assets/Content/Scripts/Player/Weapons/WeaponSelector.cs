@@ -13,7 +13,7 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
     [SerializeField] private List<WeaponSO> _shotgunList = new List<WeaponSO>();
     [SerializeField] private List<WeaponSO> _rifleList = new List<WeaponSO>();
 
-    private GameObject _currentWeaponObject;
+    public GameObject CurrentWeaponObject;
 
     [HideInInspector] public GameObject PistolObject;
     [HideInInspector] public GameObject ShotgunObject;
@@ -61,12 +61,12 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
 
     public void Draw(in WeaponSO weapon, in GameObject weaponObject)
     {
-        if (_currentWeaponObject != null)
+        if (CurrentWeaponObject != null)
         {
-            _currentWeaponObject.SetActive(false);
+            CurrentWeaponObject.SetActive(false);
         }
         CurrentWeapon = weapon;
-        _currentWeaponObject = weaponObject;
-        _currentWeaponObject.SetActive(true);
+        CurrentWeaponObject = weaponObject;
+        CurrentWeaponObject.SetActive(true);
     }
 }
