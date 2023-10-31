@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class WeaponSelector : SingletonMono<WeaponSelector>
@@ -33,7 +34,7 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
         Equip(CurrentPistol, _pistolHolder, out PistolObject);
         Draw(CurrentPistol, PistolObject);
 
-        // TEST
+        // TEST -----------------------------------------
 
         CurrentShotgun = _shotgunList[0];
         Equip(CurrentShotgun, _shotgunHolder, out ShotgunObject);
@@ -68,5 +69,13 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
         CurrentWeapon = weapon;
         CurrentWeaponObject = weaponObject;
         CurrentWeaponObject.SetActive(true);
+
+        StartCoroutine(DrawHolsterCooldown());
+    }
+
+    private IEnumerator DrawHolsterCooldown()
+    {
+        yield return new WaitForSeconds(CurrentWeapon.TimeDraw);
+        WeaponStateMachine.Instance.TransitionTo(WeaponStateMachine.Instance.WeaponIdle);
     }
 }

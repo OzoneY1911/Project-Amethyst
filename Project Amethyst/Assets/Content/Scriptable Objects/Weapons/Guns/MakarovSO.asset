@@ -34,9 +34,9 @@ MonoBehaviour:
   AnimJump: {fileID: 0}
   AnimFall: {fileID: 0}
   AnimLand: {fileID: 0}
-  TimeDraw: 0
+  TimeDraw: 1
   TimeReloadPart: 0
   TimeReloadFull: 0
-  CurrentRounds: 8
-  CurrentReserve: 32
+  CurrentRounds: 0
+  CurrentReserve: 24
   CanShoot: 1

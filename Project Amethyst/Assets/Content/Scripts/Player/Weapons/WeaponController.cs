@@ -1,14 +1,16 @@
 using System.Collections;
-using System.Timers;
 using UnityEngine;
 
 public class WeaponController : SingletonMono<WeaponController>
 {
     private static Transform _cameraTransform => CameraController.Instance.MainCamera.transform;
     private static WeaponSO _currentWeapon => WeaponSelector.Instance.CurrentWeapon;
+    protected static GameObject _currentWeaponObject => WeaponSelector.Instance.CurrentWeaponObject;
 
     private Coroutine _reloadCoroutine;
     private bool _reloading;
+    private bool _fullReload;
+    private int _roundsLacking;
 
     #region Shooting
 
@@ -16,6 +18,15 @@ public class WeaponController : SingletonMono<WeaponController>
 
     public void Shoot()
     {
+        if (_currentWeapon.CurrentRounds != 1)
+        {
+            _currentWeaponObject.GetComponent<Animator>().SetTrigger("Shot");
+        }
+        else
+        {
+            _currentWeaponObject.GetComponent<Animator>().SetTrigger("Last Shot");
+        }
+
         _currentWeapon.CurrentRounds--;
 
         RaycastHit hit;
@@ -52,6 +63,29 @@ public class WeaponController : SingletonMono<WeaponController>
             StopCoroutine(_reloadCoroutine);
         }
 
+        // Weapon has ammo in mag and chamber
+        if (_currentWeapon.CurrentRounds != 0 && _currentWeapon.RoundInChamber)
+        {
+            // Reload_Part
+            if (_fullReload)
+            {
+                _fullReload = !_fullReload;
+            }
+
+            _currentWeaponObject.GetComponent<Animator>().SetTrigger("Reload_Part");
+        }
+        // No ammo left in mag
+        else
+        {
+            // Reload_Full
+            if (!_fullReload)
+            {
+                _fullReload = !_fullReload;
+            }
+
+            _currentWeaponObject.GetComponent<Animator>().SetTrigger("Reload_Full");
+        }
+
         _reloadCoroutine = StartCoroutine(ReloadCooldown());
     }
 
@@ -69,21 +103,26 @@ public class WeaponController : SingletonMono<WeaponController>
 
         var roundsLacking = _currentWeapon.MagazineSize - _currentWeapon.CurrentRounds;
 
+        // Sufficient ammo in reserve
         if (roundsLacking <= _currentWeapon.CurrentReserve)
         {
-            if (_currentWeapon.CurrentRounds != 0 && _currentWeapon.RoundInChamber)
+            if (!_fullReload)
             {
+                // Reload_Part
                 _currentWeapon.CurrentReserve -= roundsLacking + 1;
                 _currentWeapon.CurrentRounds = _currentWeapon.MagazineSize + 1;
             }
             else
             {
+                // Reload_Full
                 _currentWeapon.CurrentReserve -= roundsLacking;
                 _currentWeapon.CurrentRounds = _currentWeapon.MagazineSize;
             }
         }
+        // Insufficient ammo in reserve
         else
         {
+            // Load last ammo from reserve
             _currentWeapon.CurrentRounds += _currentWeapon.CurrentReserve;
             _currentWeapon.CurrentReserve = 0;
         }

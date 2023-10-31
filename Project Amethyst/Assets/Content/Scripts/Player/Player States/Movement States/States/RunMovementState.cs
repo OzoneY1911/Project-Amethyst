@@ -16,7 +16,7 @@ public class RunMovementState : MovementState
 
         _movementStateMachine.CheckIfNotRunning();
 
-        _weaponSelector.CurrentWeaponObject.GetComponent<Animator>().SetFloat("Movement Blend", 1f, .5f, Time.deltaTime);
+        SetAnimatorFloat(1f, .5f);
     }
     public override void Exit()
     {

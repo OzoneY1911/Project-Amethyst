@@ -27,7 +27,7 @@ public class DrawHolsterWeaponState : WeaponState
     {
         base.Update();
 
-        _weaponStateMachine.TransitionTo(_weaponStateMachine.WeaponIdle);
+
     }
 
     public override void Exit()

@@ -12,7 +12,7 @@ public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachi
     public IState WeaponReload;
     public IState WeaponDrawHolster;
 
-    // FOR TESTING
+    // FOR TESTING ---
 #if UNITY_EDITOR
     [SerializeField] private string _currentState;
     #endif
@@ -29,12 +29,17 @@ public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachi
     {
         base.Awake();
 
-        Init(WeaponIdle);
+
+    }
+
+    private void Start()
+    {
+        Init(WeaponDrawHolster);
     }
 
     private void Update()
     {
-        // FOR TESTING
+        // FOR TESTING ---
         #if UNITY_EDITOR
         _currentState = CurrentState.ToString();
         #endif
