@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+// This class describes methods which contain actual actions for weapon features.
 public class WeaponController : SingletonMono<WeaponController>
 {
     private static Transform _cameraTransform => CameraController.Instance.MainCamera.transform;

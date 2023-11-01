@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// This class describes basic methods to control transitions between Weapon States.
+// It includes CheckIf methods which are used in states to know if a state should try to transit to another one.
 public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachine
 {
     private static InputManager _inputManager => InputManager.Instance;
