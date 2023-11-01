@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b8ac3003021c841bae85f2347efd63, type: 3}
   m_Name: MakarovSO
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 2673612792317483518, guid: 716894ab6dcadbb428299e3081c682ef, type: 3}
+  Prefab: {fileID: 4042294547142895925, guid: 716894ab6dcadbb428299e3081c682ef, type: 3}
   Name: Makarov
   Type: 0
   IsAutomatic: 0
@@ -24,16 +24,6 @@ MonoBehaviour:
   MagazineSize: 8
   DefaultReserve: 32
   MaxReserve: 64
-  AnimDraw: {fileID: 0}
-  AnimIdle: {fileID: 0}
-  AnimWalk: {fileID: 0}
-  AnimRun: {fileID: 0}
-  AnimShot: {fileID: 0}
-  AnimReloadPart: {fileID: 0}
-  AnimReloadFull: {fileID: 0}
-  AnimJump: {fileID: 0}
-  AnimFall: {fileID: 0}
-  AnimLand: {fileID: 0}
   TimeDraw: 1
   TimeReloadPart: 0
   TimeReloadFull: 0
