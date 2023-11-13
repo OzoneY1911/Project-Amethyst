@@ -26,6 +26,7 @@ public class WeaponController : SingletonMono<WeaponController>
         else
         {
             _currentWeaponObject.GetComponent<Animator>().SetTrigger("Last Shot");
+            _currentWeaponObject.GetComponent<Animator>().SetBool("Loaded", false);
         }
 
         _currentWeapon.CurrentRounds--;
@@ -72,8 +73,6 @@ public class WeaponController : SingletonMono<WeaponController>
             {
                 _fullReload = !_fullReload;
             }
-
-            _currentWeaponObject.GetComponent<Animator>().SetTrigger("Reload_Part");
         }
         // No ammo left in mag
         else
@@ -83,8 +82,6 @@ public class WeaponController : SingletonMono<WeaponController>
             {
                 _fullReload = !_fullReload;
             }
-
-            _currentWeaponObject.GetComponent<Animator>().SetTrigger("Reload_Full");
         }
 
         _reloadCoroutine = StartCoroutine(ReloadCooldown());
@@ -99,6 +96,8 @@ public class WeaponController : SingletonMono<WeaponController>
     {
         _reloading = true;
         _currentWeapon.CanShoot = false;
+
+        _currentWeaponObject.GetComponent<Animator>().SetTrigger("Reload");
 
         yield return new WaitForSeconds(_currentWeapon.ReloadTime);
 

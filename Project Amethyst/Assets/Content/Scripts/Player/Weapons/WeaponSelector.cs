@@ -70,12 +70,36 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
         CurrentWeaponObject = weaponObject;
         CurrentWeaponObject.SetActive(true);
 
-        StartCoroutine(DrawHolsterCooldown());
+        if (CurrentWeapon.CurrentRounds > 0)
+        {
+            CurrentWeaponObject.GetComponent<Animator>().SetBool("Loaded", true);
+        }
+        else
+        {
+            CurrentWeaponObject.GetComponent<Animator>().SetBool("Loaded", false);
+        }
+
+        StartCoroutine(DrawHolsterCooldown(true));
     }
 
-    private IEnumerator DrawHolsterCooldown()
+    public void Holster()
+    {
+        CurrentWeaponObject.GetComponent<Animator>().SetTrigger("Holster");
+
+        StartCoroutine(DrawHolsterCooldown(false));
+    }
+
+    private IEnumerator DrawHolsterCooldown(bool draw)
     {
         yield return new WaitForSeconds(CurrentWeapon.TimeDraw);
-        WeaponStateMachine.Instance.TransitionTo(WeaponStateMachine.Instance.WeaponIdle);
+
+        if (draw)
+        {
+            WeaponStateMachine.Instance.TransitionTo(WeaponStateMachine.Instance.WeaponIdle);
+        }
+        else
+        {
+            WeaponStateMachine.Instance.TransitionTo(WeaponStateMachine.Instance.WeaponDraw);
+        }
     }
 }

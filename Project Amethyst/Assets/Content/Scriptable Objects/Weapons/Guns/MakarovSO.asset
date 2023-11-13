@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b8ac3003021c841bae85f2347efd63, type: 3}
   m_Name: MakarovSO
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 4042294547142895925, guid: 716894ab6dcadbb428299e3081c682ef, type: 3}
+  Prefab: {fileID: 2747796854497110918, guid: 3f25f143ce163d14d8d5f4a9f5bef78b, type: 3}
   Name: Makarov
   Type: 0
   IsAutomatic: 0
@@ -27,6 +27,6 @@ MonoBehaviour:
   TimeDraw: 1
   TimeReloadPart: 0
   TimeReloadFull: 0
-  CurrentRounds: 0
-  CurrentReserve: 24
+  CurrentRounds: 9
+  CurrentReserve: 11
   CanShoot: 1

@@ -12,7 +12,8 @@ public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachi
     public IState WeaponIdle;
     public IState WeaponShot;
     public IState WeaponReload;
-    public IState WeaponDrawHolster;
+    public IState WeaponDraw;
+    public IState WeaponHolster;
 
     // FOR TESTING ---
 #if UNITY_EDITOR
@@ -24,7 +25,8 @@ public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachi
         WeaponIdle = new IdleWeaponState();
         WeaponShot = new ShotWeaponState();
         WeaponReload = new ReloadWeaponState();
-        WeaponDrawHolster = new DrawHolsterWeaponState();
+        WeaponDraw = new DrawWeaponState();
+        WeaponHolster = new HolsterWeaponState();
     }
 
     protected override void Awake()
@@ -36,7 +38,7 @@ public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachi
 
     private void Start()
     {
-        Init(WeaponDrawHolster);
+        Init(WeaponDraw);
     }
 
     private void Update()
@@ -70,7 +72,8 @@ public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachi
         WeaponIdle = null;
         WeaponShot = null;
         WeaponReload = null;
-        WeaponDrawHolster = null;
+        WeaponDraw = null;
+        WeaponHolster = null;
     }
 
     public void CheckIfShooting()
@@ -91,11 +94,12 @@ public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachi
         }
     }
 
+    // Reload If ((CurrentRounds < MagazineSize) OR (CurrentRounds == MagazineSize AND RoundInChamber)) AND CurrentReserve > 0
     public void CheckIfReloading()
     {
         if (_inputManager.GetPlayerReload())
         {
-            if ((_currentWeapon.CurrentRounds < _currentWeapon.MagazineSize) || (_currentWeapon.CurrentRounds == _currentWeapon.MagazineSize && _currentWeapon.RoundInChamber) && _currentWeapon.CurrentReserve > 0)
+            if (((_currentWeapon.CurrentRounds < _currentWeapon.MagazineSize) || (_currentWeapon.CurrentRounds == _currentWeapon.MagazineSize && _currentWeapon.RoundInChamber)) && _currentWeapon.CurrentReserve > 0)
             {
                 TransitionTo(WeaponReload);
             }
@@ -106,15 +110,15 @@ public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachi
     {
         if (_inputManager.GetPlayerDrawPistol() && _currentWeapon.Type != WeaponType.Pistol)
         {
-            TransitionTo(WeaponDrawHolster);
+            TransitionTo(WeaponHolster);
         }
         else if (_inputManager.GetPlayerDrawShotgun() && _currentWeapon.Type != WeaponType.Shotgun)
         {
-            TransitionTo(WeaponDrawHolster);
+            TransitionTo(WeaponHolster);
         }
         else if (_inputManager.GetPlayerDrawRifle() && _currentWeapon.Type != WeaponType.Rifle)
         {
-            TransitionTo(WeaponDrawHolster);
+            TransitionTo(WeaponHolster);
         }
     }
 }
