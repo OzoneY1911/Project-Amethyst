@@ -9,17 +9,9 @@ public class DrawWeaponState : WeaponState
             _weaponSelector.CurrentWeapon.CanShoot = true;
         }
 
-        if (_inputManager.GetPlayerDrawPistol())
+        if (_weaponSelector.NextWeapon != null)
         {
-            _weaponSelector.Draw(_weaponSelector.CurrentPistol, _weaponSelector.PistolObject);
-        }
-        else if (_inputManager.GetPlayerDrawShotgun())
-        {
-            _weaponSelector.Draw(_weaponSelector.CurrentShotgun, _weaponSelector.ShotgunObject);
-        }
-        else if (_inputManager.GetPlayerDrawRifle())
-        {
-            _weaponSelector.Draw(_weaponSelector.CurrentRifle, _weaponSelector.RifleObject);
+            _weaponSelector.Draw(_weaponSelector.NextWeapon, _weaponSelector.NextWeaponObject);
         }
     }
 

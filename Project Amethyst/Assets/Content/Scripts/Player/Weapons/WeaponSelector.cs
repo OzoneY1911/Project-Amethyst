@@ -15,12 +15,14 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
     [SerializeField] private List<WeaponSO> _rifleList = new List<WeaponSO>();
 
     public GameObject CurrentWeaponObject;
+    public GameObject NextWeaponObject;
 
     [HideInInspector] public GameObject PistolObject;
     [HideInInspector] public GameObject ShotgunObject;
     [HideInInspector] public GameObject RifleObject;
 
     public WeaponSO CurrentWeapon;
+    public WeaponSO NextWeapon;
 
     [HideInInspector] public WeaponSO CurrentPistol;
     [HideInInspector] public WeaponSO CurrentShotgun;

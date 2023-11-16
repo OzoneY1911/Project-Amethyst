@@ -11,7 +11,6 @@ public class WeaponController : SingletonMono<WeaponController>
     private Coroutine _reloadCoroutine;
     private bool _reloading;
     private bool _fullReload;
-    private int _roundsLacking;
 
     #region Shooting
 

@@ -5,7 +5,31 @@ using UnityEngine;
 public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachine
 {
     private static InputManager _inputManager => InputManager.Instance;
+    private static WeaponSelector _weaponSelector => WeaponSelector.Instance;
     private static WeaponSO _currentWeapon => WeaponSelector.Instance.CurrentWeapon;
+
+    private static WeaponSO _nextWeapon
+    {
+        get
+        {
+            return WeaponSelector.Instance.NextWeapon;
+        }
+        set
+        {
+            WeaponSelector.Instance.NextWeapon = value;
+        }
+    }
+    private static GameObject _nextWeaponObject
+    {
+        get
+        {
+            return WeaponSelector.Instance.NextWeaponObject;
+        }
+        set
+        {
+            WeaponSelector.Instance.NextWeaponObject = value;
+        }
+    }
 
     public IState CurrentState { get; private set; }
 
@@ -110,14 +134,20 @@ public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachi
     {
         if (_inputManager.GetPlayerDrawPistol() && _currentWeapon.Type != WeaponType.Pistol)
         {
+            _nextWeapon = _weaponSelector.CurrentPistol;
+            _nextWeaponObject = _weaponSelector.PistolObject;
             TransitionTo(WeaponHolster);
         }
         else if (_inputManager.GetPlayerDrawShotgun() && _currentWeapon.Type != WeaponType.Shotgun)
         {
+            _nextWeapon = _weaponSelector.CurrentShotgun;
+            _nextWeaponObject = _weaponSelector.ShotgunObject;
             TransitionTo(WeaponHolster);
         }
         else if (_inputManager.GetPlayerDrawRifle() && _currentWeapon.Type != WeaponType.Rifle)
         {
+            _nextWeapon = _weaponSelector.CurrentRifle;
+            _nextWeaponObject = _weaponSelector.RifleObject;
             TransitionTo(WeaponHolster);
         }
     }

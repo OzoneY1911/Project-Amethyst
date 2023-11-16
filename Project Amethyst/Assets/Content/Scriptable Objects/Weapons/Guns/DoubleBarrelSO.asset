@@ -16,6 +16,7 @@ MonoBehaviour:
   Name: Double Barrel
   Type: 1
   IsAutomatic: 0
+  RoundInChamber: 0
   Damage: 100
   Rate: 120
   Range: 10
@@ -23,6 +24,9 @@ MonoBehaviour:
   MagazineSize: 2
   DefaultReserve: 20
   MaxReserve: 50
+  TimeDraw: 1
+  TimeReloadPart: 0
+  TimeReloadFull: 0
   CurrentRounds: 0
-  CurrentReserve: 0
+  CurrentReserve: 20
   CanShoot: 1

@@ -16,17 +16,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 937dbca1b5c8e774caa602da2b25c247,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.05
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 937dbca1b5c8e774caa602da2b25c247,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 937dbca1b5c8e774caa602da2b25c247,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 937dbca1b5c8e774caa602da2b25c247,
         type: 3}
@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 937dbca1b5c8e774caa602da2b25c247,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 937dbca1b5c8e774caa602da2b25c247,
         type: 3}
@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 937dbca1b5c8e774caa602da2b25c247,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 937dbca1b5c8e774caa602da2b25c247,
         type: 3}
@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 937dbca1b5c8e774caa602da2b25c247,
         type: 3}
       propertyPath: m_Name
-      value: Makarov_Animation
+      value: Makarov_Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 3168163312806472405, guid: 937dbca1b5c8e774caa602da2b25c247,
         type: 3}
