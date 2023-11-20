@@ -107,6 +107,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a1fa560-1e74-4eb5-b559-80751c6b82a5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +261,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""DrawRifle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""035ac5d2-1f9d-4300-b6a9-57ea84c5f83d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -269,6 +289,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_DrawPistol = m_Player.FindAction("DrawPistol", throwIfNotFound: true);
         m_Player_DrawShotgun = m_Player.FindAction("DrawShotgun", throwIfNotFound: true);
         m_Player_DrawRifle = m_Player.FindAction("DrawRifle", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -339,6 +360,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DrawPistol;
     private readonly InputAction m_Player_DrawShotgun;
     private readonly InputAction m_Player_DrawRifle;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -352,6 +374,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @DrawPistol => m_Wrapper.m_Player_DrawPistol;
         public InputAction @DrawShotgun => m_Wrapper.m_Player_DrawShotgun;
         public InputAction @DrawRifle => m_Wrapper.m_Player_DrawRifle;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -388,6 +411,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @DrawRifle.started += instance.OnDrawRifle;
             @DrawRifle.performed += instance.OnDrawRifle;
             @DrawRifle.canceled += instance.OnDrawRifle;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -419,6 +445,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @DrawRifle.started -= instance.OnDrawRifle;
             @DrawRifle.performed -= instance.OnDrawRifle;
             @DrawRifle.canceled -= instance.OnDrawRifle;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -447,5 +476,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnDrawPistol(InputAction.CallbackContext context);
         void OnDrawShotgun(InputAction.CallbackContext context);
         void OnDrawRifle(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

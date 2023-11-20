@@ -65,7 +65,7 @@ public class WeaponController : SingletonMono<WeaponController>
         }
 
         // Weapon has ammo in mag and chamber
-        if (_currentWeapon.CurrentRounds != 0 && _currentWeapon.RoundInChamber)
+        if (_currentWeapon.CurrentRounds != 0)
         {
             // Reload_Part
             if (_fullReload)
@@ -103,19 +103,29 @@ public class WeaponController : SingletonMono<WeaponController>
         var roundsLacking = _currentWeapon.MagazineSize - _currentWeapon.CurrentRounds;
 
         // Sufficient ammo in reserve
-        if (roundsLacking <= _currentWeapon.CurrentReserve)
+        if (roundsLacking < _currentWeapon.CurrentReserve)
         {
             if (!_fullReload)
             {
                 // Reload_Part
-                _currentWeapon.CurrentReserve -= roundsLacking + 1;
-                _currentWeapon.CurrentRounds = _currentWeapon.MagazineSize + 1;
+                if (_currentWeapon.RoundInChamber)
+                {
+                    _currentWeapon.CurrentReserve -= roundsLacking + 1;
+                    _currentWeapon.CurrentRounds = _currentWeapon.MagazineSize + 1;
+                }
+                else
+                {
+                    _currentWeapon.CurrentReserve -= roundsLacking;
+                    _currentWeapon.CurrentRounds = _currentWeapon.MagazineSize;
+                }
+                Debug.Log("Part Reload");
             }
             else
             {
                 // Reload_Full
                 _currentWeapon.CurrentReserve -= roundsLacking;
                 _currentWeapon.CurrentRounds = _currentWeapon.MagazineSize;
+                Debug.Log("Full Reload");
             }
         }
         // Insufficient ammo in reserve
@@ -124,6 +134,7 @@ public class WeaponController : SingletonMono<WeaponController>
             // Load last ammo from reserve
             _currentWeapon.CurrentRounds += _currentWeapon.CurrentReserve;
             _currentWeapon.CurrentReserve = 0;
+            Debug.Log("Last ammo loaded");
         }
 
         _currentWeapon.CanShoot = true;

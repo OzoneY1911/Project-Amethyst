@@ -30,6 +30,15 @@ public class InputManager : SingletonMono<InputManager>
 
     #endregion
 
+    #region Common Input
+
+    public bool GetPlayerInteract()
+    {
+        return _playerControls.Player.Interact.IsPressed();
+    }
+
+    #endregion
+
     #region Movement Input
 
     public Vector2 GetPlayerWalk()
