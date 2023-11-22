@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class DestructibleFence : MonoBehaviour
@@ -14,12 +15,16 @@ public class DestructibleFence : MonoBehaviour
 
     [SerializeField] private GameObject[] _plank;
 
+    public NavMeshObstacle Obstacle;
+
     private bool _inRange;
     private bool _canRepair;
 
     private void Awake()
     {
         _health = _maxHealth;
+
+        Obstacle = GetComponent<NavMeshObstacle>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -104,8 +109,13 @@ public class DestructibleFence : MonoBehaviour
         }
 
 
-        if (_health < 0f)
+        if (_health <= 0f)
         {
+            if (Obstacle.enabled)
+            {
+                Obstacle.enabled = false;
+            }
+
             _health = 0f;
         }
     }

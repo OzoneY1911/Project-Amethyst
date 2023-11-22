@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     public Transform Target;
 
     private NavMeshAgent _agent;
+    private Animator _animator;
     public float Range = 2f;
 
     public bool check1 = true;
@@ -18,6 +19,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -28,6 +30,7 @@ public class EnemyController : MonoBehaviour
         //{
                 _agent.SetDestination(Player.position);
                 Debug.Log("HI1");
+        _animator.SetFloat("Speed", _agent.velocity.magnitude / _agent.speed);
         //}
         /*else if (Physics.CheckSphere(transform.position, Range, 1 << LayerMask.NameToLayer("Destructible")))
         {
