@@ -91,6 +91,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 280345564499964094}
   m_SourcePrefab: {fileID: 100100000, guid: 91ad9610aa0f1a249989e4c4a7ad2ec4, type: 3}
+--- !u!1 &2642283178412095518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1063881814991549394, guid: 91ad9610aa0f1a249989e4c4a7ad2ec4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6167419848915711024}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4625820201088148430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7663678114840504322, guid: 91ad9610aa0f1a249989e4c4a7ad2ec4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6167419848915711024}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6437467394651539809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 91ad9610aa0f1a249989e4c4a7ad2ec4,
@@ -134,3 +146,13 @@ MonoBehaviour:
   _repairHint: {fileID: 0}
   _healthBar: {fileID: 0}
   _healthFill: {fileID: 0}
+  _plank:
+  - {fileID: 4625820201088148430}
+  - {fileID: 7056296840063374996}
+  - {fileID: 2642283178412095518}
+--- !u!1 &7056296840063374996 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5442016059645222236, guid: 91ad9610aa0f1a249989e4c4a7ad2ec4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6167419848915711024}
+  m_PrefabAsset: {fileID: 0}
