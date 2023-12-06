@@ -16,3 +16,4 @@ MonoBehaviour:
   Name: TEST Enemy
   Type: 0
   MaxHealth: 100
+  Damage: 10

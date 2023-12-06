@@ -17,4 +17,5 @@ public class EnemySO : ScriptableObject
 
     [Header("Main Stats")]
     public int MaxHealth;
+    public int Damage;
 }

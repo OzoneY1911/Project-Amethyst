@@ -69,18 +69,6 @@ public class DestructibleFence : MonoBehaviour
         {
             Repair();
         }
-        else
-        {
-            Break();
-
-            if (_health == 0f)
-            {
-                foreach (var val in _plank)
-                {
-                    val.SetActive(false);
-                }
-            }
-        }
     }
 
     private void UpdateHealthBar()
@@ -90,7 +78,7 @@ public class DestructibleFence : MonoBehaviour
 
     public void Break()
     {
-        _health -= 0.25f;
+        _health -= 25f;
         UpdateHealthBar();
 
         if (_health == 0f && !_plank[0].activeSelf)
