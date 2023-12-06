@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InputManager : SingletonMono<InputManager>
 {
-    private PlayerControls _playerControls;
+    public PlayerControls _playerControls;
 
     #region Basic Methods
 
@@ -16,6 +16,8 @@ public class InputManager : SingletonMono<InputManager>
     private void OnEnable()
     {
         _playerControls.Enable();
+
+        _playerControls.UI.Disable();
     }
 
     private void OnDisable()
@@ -35,6 +37,16 @@ public class InputManager : SingletonMono<InputManager>
     public bool GetPlayerInteract()
     {
         return _playerControls.Player.Interact.IsPressed();
+    }
+
+    public bool GetPlayerPause()
+    {
+        return _playerControls.Player.PauseMenu.IsPressed();
+    }
+
+    public bool GetPlayerEscape()
+    {
+        return _playerControls.UI.Escape.IsPressed();
     }
 
     #endregion

@@ -3,23 +3,35 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using static UnityEngine.Rendering.HDROutputUtils;
 
 public class LevelLoader : SingletonMono<LevelLoader>
 {
+    [SerializeField] private GameObject _blackScreen;
     [SerializeField] private GameObject _loadScreen;
     [SerializeField] private Slider _loadSlider;
     [SerializeField] private TextMeshProUGUI _loadText;
 
-    public void LoadLevel(string name)
+    private void Start()
     {
-        StartCoroutine(LoadLevelAsync(name));
+        _blackScreen.GetComponent<FadeCanvasGroup>().HideCanvas();
     }
 
-    private IEnumerator LoadLevelAsync(string name)
+    public void LoadLevel(string name)
+    {
+        if (_loadScreen != null)
+        {
+            StartCoroutine(LoadAsync(name));
+        }
+        else
+        {
+            StartCoroutine(Load(name));
+        }
+    }
+
+    private IEnumerator LoadAsync(string name)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(name);
-
-        _loadScreen.SetActive(true);
 
         operation.allowSceneActivation = false;
 
@@ -34,8 +46,32 @@ public class LevelLoader : SingletonMono<LevelLoader>
 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    operation.allowSceneActivation = true;
+                    StartCoroutine(Load(name, operation));
                 }
+            }
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator Load(string name, AsyncOperation operation = null)
+    {
+        _blackScreen.GetComponent<FadeCanvasGroup>().ShowCanvas();
+
+        while (_blackScreen.GetComponent<CanvasGroup>().alpha != 1f)
+        {
+            yield return null;
+        }
+
+        if (_blackScreen.GetComponent<CanvasGroup>().alpha == 1f)
+        {
+            if (operation == null)
+            {
+                SceneManager.LoadScene(name);
+            }
+            else
+            {
+                operation.allowSceneActivation = true;
             }
 
             yield return null;

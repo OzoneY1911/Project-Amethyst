@@ -26,6 +26,20 @@ public class CameraController : SingletonMono<CameraController>
     {
         base.Awake();
 
-        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void DisableRotation()
+    {
+        _idleCamera.GetComponent<CinemachineInputProvider>().enabled = false;
+        _walkCamera.GetComponent<CinemachineInputProvider>().enabled = false;
+        _runCamera.GetComponent<CinemachineInputProvider>().enabled = false;
+        _airCamera.GetComponent<CinemachineInputProvider>().enabled = false;
+    }
+    public void EnableRotation()
+    {
+        _idleCamera.GetComponent<CinemachineInputProvider>().enabled = true;
+        _walkCamera.GetComponent<CinemachineInputProvider>().enabled = true;
+        _runCamera.GetComponent<CinemachineInputProvider>().enabled = true;
+        _airCamera.GetComponent<CinemachineInputProvider>().enabled = true;
     }
 }
