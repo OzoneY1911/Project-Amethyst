@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : SingletonMono<InputManager>
 {
     public PlayerControls _playerControls;
+    protected static CameraController _cameraController => CameraController.Instance;
 
     #region Basic Methods
 
@@ -11,6 +13,8 @@ public class InputManager : SingletonMono<InputManager>
         base.Awake();
 
         _playerControls = new PlayerControls();
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnEnable()
@@ -30,6 +34,30 @@ public class InputManager : SingletonMono<InputManager>
         _playerControls.Dispose();
     }
 
+    public void EnableInput()
+    {
+        _playerControls.UI.Disable();
+        _playerControls.Player.Enable();
+        _cameraController.EnableRotation();
+
+        if (Cursor.lockState != CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    public void DisableInput(in bool enableCursor = true)
+    {
+        _playerControls.Player.Disable();
+        _playerControls.UI.Enable();
+        _cameraController.DisableRotation();
+
+        if (enableCursor)
+        {
+            Cursor.lockState = CursorLockMode.None;   
+        }
+    }
+
     #endregion
 
     #region Common Input
@@ -44,9 +72,14 @@ public class InputManager : SingletonMono<InputManager>
         return _playerControls.Player.PauseMenu.IsPressed();
     }
 
-    public bool GetPlayerEscape()
+    public bool GetUIEscape()
     {
-        return _playerControls.UI.Escape.IsPressed();
+        return _playerControls.UI.EscapeUI.IsPressed();
+    }
+
+    public bool GetUIClose()
+    {
+        return _playerControls.UI.CloseUI.IsPressed();
     }
 
     #endregion

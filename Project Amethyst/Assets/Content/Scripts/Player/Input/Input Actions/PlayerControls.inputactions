@@ -252,7 +252,7 @@
                 {
                     "name": "",
                     "id": "035ac5d2-1f9d-4300-b6a9-57ea84c5f83d",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -263,7 +263,7 @@
                 {
                     "name": "",
                     "id": "427db4bb-160b-42c2-bedb-1645ff58018a",
-                    "path": "<Keyboard>/escape",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -278,9 +278,18 @@
             "id": "d0312076-f627-428c-9459-399112afdf28",
             "actions": [
                 {
-                    "name": "Escape",
+                    "name": "EscapeUI",
                     "type": "Button",
                     "id": "bef0abfd-03f3-4274-b8d1-7899d42d6eb6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseUI",
+                    "type": "Button",
+                    "id": "e43060d3-69f5-4934-b65f-075858cbe098",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -291,11 +300,22 @@
                 {
                     "name": "",
                     "id": "a534c5ac-f2c0-4de9-a513-41de8e6a424d",
-                    "path": "<Keyboard>/escape",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Escape",
+                    "action": "EscapeUI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7f662a1-9b41-4aff-91ce-3c941a11c6d6",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

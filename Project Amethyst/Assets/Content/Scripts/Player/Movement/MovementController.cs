@@ -19,6 +19,8 @@ public class MovementController : SingletonMono<MovementController>
     public float WalkSpeed { get { return _walkSpeed; } }
     public float RunSpeed { get { return _runSpeed; } }
 
+    public float MovementModifier = 1f;
+
     #region Properties
 
     public bool CheckGround
@@ -54,7 +56,7 @@ public class MovementController : SingletonMono<MovementController>
         _orientation.eulerAngles = new Vector3(0f, _cameraController.MainCamera.transform.localEulerAngles.y, 0f);
         move = (_orientation.forward * move.z + _orientation.right * move.x).normalized;
 
-        _controller.Move(MovementSpeed * Time.deltaTime * move);
+        _controller.Move(MovementSpeed * MovementModifier * Time.deltaTime * move);
     }
 
     public void Jump()

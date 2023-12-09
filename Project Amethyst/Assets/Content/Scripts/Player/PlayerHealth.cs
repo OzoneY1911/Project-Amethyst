@@ -4,13 +4,24 @@ using UnityEngine.UI;
 public class PlayerHealth : SingletonMono<PlayerHealth>
 {
     protected static InputManager _inputManager => InputManager.Instance;
-    protected static CameraController _cameraController => CameraController.Instance;
 
     [SerializeField] private Slider _healthBar;
     [SerializeField] private GameObject _deathScreen;
 
     private int _health;
-    public int MaxHealth;
+    private int _maxHealth = 100;
+
+    public int MaxHealth
+    {
+        get
+        {
+            return _maxHealth;
+        }
+        set
+        {
+            UpdateHealthBar();
+        }
+    }
 
     protected override void Awake()
     {
@@ -44,13 +55,10 @@ public class PlayerHealth : SingletonMono<PlayerHealth>
 
     private void Die()
     {
-        _inputManager._playerControls.Player.Disable();
-        _inputManager._playerControls.UI.Enable();
-        _cameraController.DisableRotation();
+        _inputManager.DisableInput();
 
         _deathScreen.GetComponent<FadeCanvasGroup>().ShowCanvas();
         Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.None;
     }
 
     private void UpdateHealthBar()

@@ -25,6 +25,9 @@ public class FadeCanvasGroup : MonoBehaviour
 
     private IEnumerator FadeIn()
     {
+        _canvasGroup.interactable = true;
+        _canvasGroup.blocksRaycasts = true;
+
         while (_canvasGroup.alpha != 1f)
         {
             _canvasGroup.alpha += _fadeSpeed;
@@ -33,6 +36,9 @@ public class FadeCanvasGroup : MonoBehaviour
     }
     private IEnumerator FadeOut()
     {
+        _canvasGroup.interactable = false;
+        _canvasGroup.blocksRaycasts = false;
+
         while (_canvasGroup.alpha != 0f)
         {
             _canvasGroup.alpha -= _fadeSpeed;

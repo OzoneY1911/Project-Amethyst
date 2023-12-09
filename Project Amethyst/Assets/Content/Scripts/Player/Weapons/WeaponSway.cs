@@ -8,9 +8,8 @@ public class WeaponSway : MonoBehaviour
 
     void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * _swayMultiplier;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * _swayMultiplier;
-
+        float mouseX = InputManager.Instance.GetPlayerLook().x * _swayMultiplier;
+        float mouseY = InputManager.Instance.GetPlayerLook().y * _swayMultiplier;
 
         Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
         Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);

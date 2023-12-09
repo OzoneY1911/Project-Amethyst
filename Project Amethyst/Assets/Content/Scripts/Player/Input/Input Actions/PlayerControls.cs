@@ -274,7 +274,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""035ac5d2-1f9d-4300-b6a9-57ea84c5f83d"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -285,7 +285,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""427db4bb-160b-42c2-bedb-1645ff58018a"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -300,9 +300,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""d0312076-f627-428c-9459-399112afdf28"",
             ""actions"": [
                 {
-                    ""name"": ""Escape"",
+                    ""name"": ""EscapeUI"",
                     ""type"": ""Button"",
                     ""id"": ""bef0abfd-03f3-4274-b8d1-7899d42d6eb6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""e43060d3-69f5-4934-b65f-075858cbe098"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -313,11 +322,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a534c5ac-f2c0-4de9-a513-41de8e6a424d"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Escape"",
+                    ""action"": ""EscapeUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7f662a1-9b41-4aff-91ce-3c941a11c6d6"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseUI"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -341,7 +361,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_PauseMenu = m_Player.FindAction("PauseMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
+        m_UI_EscapeUI = m_UI.FindAction("EscapeUI", throwIfNotFound: true);
+        m_UI_CloseUI = m_UI.FindAction("CloseUI", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -529,12 +550,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Escape;
+    private readonly InputAction m_UI_EscapeUI;
+    private readonly InputAction m_UI_CloseUI;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
         public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Escape => m_Wrapper.m_UI_Escape;
+        public InputAction @EscapeUI => m_Wrapper.m_UI_EscapeUI;
+        public InputAction @CloseUI => m_Wrapper.m_UI_CloseUI;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -544,16 +567,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @Escape.started += instance.OnEscape;
-            @Escape.performed += instance.OnEscape;
-            @Escape.canceled += instance.OnEscape;
+            @EscapeUI.started += instance.OnEscapeUI;
+            @EscapeUI.performed += instance.OnEscapeUI;
+            @EscapeUI.canceled += instance.OnEscapeUI;
+            @CloseUI.started += instance.OnCloseUI;
+            @CloseUI.performed += instance.OnCloseUI;
+            @CloseUI.canceled += instance.OnCloseUI;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
         {
-            @Escape.started -= instance.OnEscape;
-            @Escape.performed -= instance.OnEscape;
-            @Escape.canceled -= instance.OnEscape;
+            @EscapeUI.started -= instance.OnEscapeUI;
+            @EscapeUI.performed -= instance.OnEscapeUI;
+            @EscapeUI.canceled -= instance.OnEscapeUI;
+            @CloseUI.started -= instance.OnCloseUI;
+            @CloseUI.performed -= instance.OnCloseUI;
+            @CloseUI.canceled -= instance.OnCloseUI;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -587,6 +616,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     }
     public interface IUIActions
     {
-        void OnEscape(InputAction.CallbackContext context);
+        void OnEscapeUI(InputAction.CallbackContext context);
+        void OnCloseUI(InputAction.CallbackContext context);
     }
 }
