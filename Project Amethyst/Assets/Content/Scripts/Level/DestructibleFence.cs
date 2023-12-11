@@ -7,10 +7,13 @@ public class DestructibleFence : MonoBehaviour
     private static InputManager _inputManager => InputManager.Instance;
 
     [SerializeField] private float _health;
+
+    public float Health { get { return _health; } }
+
     private float _maxHealth = 100;
 
-    [SerializeField] private GameObject _repairHint;
-    [SerializeField] private GameObject _healthBar;
+    [SerializeField] private CanvasGroup _interactHint;
+    [SerializeField] private CanvasGroup _healthBar;
     [SerializeField] private Slider _healthFill;
 
     [SerializeField] private GameObject[] _plank;
@@ -33,8 +36,8 @@ public class DestructibleFence : MonoBehaviour
         {
             _inRange = true;
             UpdateHealthBar();
-            _repairHint.SetActive(true);
-            _healthBar.SetActive(true);
+            _interactHint.GetComponent<FadeCanvasGroup>().ShowCanvas();
+            _healthBar.GetComponent<FadeCanvasGroup>().ShowCanvas();
         }
     }
 
@@ -43,8 +46,8 @@ public class DestructibleFence : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _inRange = false;
-            _repairHint.SetActive(false);
-            _healthBar.SetActive(false);
+            _interactHint.GetComponent<FadeCanvasGroup>().HideCanvas();
+            _healthBar.GetComponent<FadeCanvasGroup>().HideCanvas();
         }
     }
 
@@ -79,23 +82,6 @@ public class DestructibleFence : MonoBehaviour
     public void Break()
     {
         _health -= 25f;
-        UpdateHealthBar();
-
-        if (_health == 0f && !_plank[0].activeSelf)
-        {
-            _plank[0].SetActive(false);
-        }
-
-        if (_health <= 33f && !_plank[1].activeSelf)
-        {
-            _plank[1].SetActive(false);
-        }
-
-        if (_health <= 67f && !_plank[2].activeSelf)
-        {
-            _plank[2].SetActive(false);
-        }
-
 
         if (_health <= 0f)
         {
@@ -106,12 +92,33 @@ public class DestructibleFence : MonoBehaviour
 
             _health = 0f;
         }
+
+        if (_health == 0f && _plank[0].activeSelf)
+        {
+            _plank[0].SetActive(false);
+        }
+
+        if (_health <= 33f && _plank[1].activeSelf)
+        {
+            _plank[1].SetActive(false);
+        }
+
+        if (_health <= 67f && _plank[2].activeSelf)
+        {
+            _plank[2].SetActive(false);
+        }
+
+        UpdateHealthBar();
     }
 
     private void Repair()
     {
         _health += 0.5f;
-        UpdateHealthBar();
+
+        if (_health >= _maxHealth)
+        {
+            _health = _maxHealth;
+        }
 
         if (_health > 33f && !_plank[0].activeSelf)
         {
@@ -127,5 +134,7 @@ public class DestructibleFence : MonoBehaviour
         {
             _plank[2].SetActive(true);
         }
+
+        UpdateHealthBar();
     }
 }
