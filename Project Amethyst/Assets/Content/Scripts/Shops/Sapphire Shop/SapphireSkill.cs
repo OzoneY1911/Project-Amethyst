@@ -1,5 +1,6 @@
 [System.Serializable]
 public enum SapphireSkill
 {
-    MaxHealth = 15
+    MaxHealth = 50,
+    RestoreHealth = 75
 }

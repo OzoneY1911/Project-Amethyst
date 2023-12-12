@@ -1,4 +1,5 @@
 public enum RubySkill
 {
-    DamageBoost
+    DamageBoost = 50,
+    RestoreAmmo = 75
 }

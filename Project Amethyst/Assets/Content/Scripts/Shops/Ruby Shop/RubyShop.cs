@@ -1,11 +1,14 @@
 public class RubyShop : ShopController
 {
+    private static WeaponController _weaponController => WeaponController.Instance;
+    private static WeaponSO _currentWeapon => WeaponSelector.Instance.CurrentWeapon;
+
     private void Start()
     {
         _playerShopCurrency = _playerCurrency.Ruby;
     }
 
-    public void BuyEmeraldSkill(RubySkillChoice choice)
+    public void BuyRubySkill(RubySkillChoice choice)
     {
         int price = (int)choice.SkillName;
 
@@ -15,6 +18,11 @@ public class RubyShop : ShopController
             {
                 case RubySkill.DamageBoost:
                     _playerShopCurrency.Remove(price);
+                    _weaponController.DamageMultiplier *= 2;
+                    break;
+                case RubySkill.RestoreAmmo:
+                    _playerShopCurrency.Remove(price);
+                    _currentWeapon.CurrentReserve = _currentWeapon.MaxReserve;
                     break;
             }
         }

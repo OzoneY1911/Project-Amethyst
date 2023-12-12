@@ -13,6 +13,8 @@ public class PlayerCurrency : SingletonMono<PlayerCurrency>
     public Currency Emerald { get { return _emerald; } }
     public Currency Sapphire { get { return _sapphire; } }
 
+    public Currency[] CurrencyList;
+
     [SerializeField] private TextMeshProUGUI _cashCounter;
     [SerializeField] private TextMeshProUGUI _rubyCounter;
     [SerializeField] private TextMeshProUGUI _emeraldCounter;
@@ -32,10 +34,12 @@ public class PlayerCurrency : SingletonMono<PlayerCurrency>
         _emerald.UpdateCounter();
         _sapphire.UpdateCounter();
 
-        _cash.Add(100);
-        _ruby.Add(100);
-        _emerald.Add(100);
-        _sapphire.Add(100);
+        CurrencyList = new Currency[] { _ruby, _emerald, _sapphire };
+
+        Add(_cash, 100);
+        Add(_ruby, 100);
+        Add(_emerald, 100);
+        Add(_sapphire, 100);
     }
 
     private void InitCurrency()
@@ -52,5 +56,10 @@ public class PlayerCurrency : SingletonMono<PlayerCurrency>
         _ruby = null;
         _emerald = null;
         _sapphire = null;
+    }
+
+    public void Add(Currency currency, int value)
+    {
+        currency.Add(value);
     }
 }

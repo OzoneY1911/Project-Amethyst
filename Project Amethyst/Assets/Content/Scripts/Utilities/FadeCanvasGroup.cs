@@ -8,6 +8,12 @@ public class FadeCanvasGroup : MonoBehaviour
 
     [SerializeField] private float _fadeSpeed = 0.1f;
 
+    private Coroutine _inCoroutine;
+    private Coroutine _outCoroutine;
+
+    private bool _fadingIn;
+    private bool _fadingOut;
+
     private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
@@ -15,16 +21,30 @@ public class FadeCanvasGroup : MonoBehaviour
 
     public void ShowCanvas()
     {
-        StartCoroutine(FadeIn());
+        if (_fadingOut)
+        {
+            StopCoroutine(_outCoroutine);
+            _fadingOut = false;
+        }
+
+        _inCoroutine = StartCoroutine(FadeIn());
     }
 
     public void HideCanvas()
     {
-        StartCoroutine(FadeOut());
+        if (_fadingIn)
+        {
+            StopCoroutine(_inCoroutine);
+            _fadingIn = false;
+        }
+
+        _outCoroutine = StartCoroutine(FadeOut());
     }
 
     private IEnumerator FadeIn()
     {
+        _fadingIn = true;
+
         _canvasGroup.interactable = true;
         _canvasGroup.blocksRaycasts = true;
 
@@ -33,9 +53,14 @@ public class FadeCanvasGroup : MonoBehaviour
             _canvasGroup.alpha += _fadeSpeed;
             yield return null;
         }
+
+        _fadingIn = false;
     }
+
     private IEnumerator FadeOut()
     {
+        _fadingOut = true;
+
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
 
@@ -44,5 +69,7 @@ public class FadeCanvasGroup : MonoBehaviour
             _canvasGroup.alpha -= _fadeSpeed;
             yield return null;
         }
+
+        _fadingOut = false;
     }
 }

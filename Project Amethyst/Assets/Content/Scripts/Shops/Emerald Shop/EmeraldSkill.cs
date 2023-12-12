@@ -1,5 +1,6 @@
 [System.Serializable]
 public enum EmeraldSkill
 {
-    MovementSpeed = 15
+    MovementSpeed = 50,
+    ReloadSpeed = 75
 }

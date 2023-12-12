@@ -12,6 +12,9 @@ public class WeaponController : SingletonMono<WeaponController>
     private bool _reloading;
     private bool _fullReload;
 
+    public int ReloadMultiplier = 1;
+    public int DamageMultiplier = 1;
+
     #region Shooting
 
     // SHOOTING
@@ -35,7 +38,7 @@ public class WeaponController : SingletonMono<WeaponController>
         {
             if (hit.collider.tag == "Enemy")
             {
-                hit.collider.GetComponent<EnemyHealth>().ChangeHealth(-_currentWeapon.Damage);
+                hit.collider.GetComponent<EnemyHealth>().ChangeHealth(-_currentWeapon.Damage * DamageMultiplier);
             }
         }
 
@@ -98,7 +101,7 @@ public class WeaponController : SingletonMono<WeaponController>
 
         _currentWeaponObject.GetComponent<Animator>().SetTrigger("Reload");
 
-        yield return new WaitForSeconds(_currentWeapon.ReloadTime);
+        yield return new WaitForSeconds(_currentWeapon.ReloadTime / ReloadMultiplier);
 
         var roundsLacking = _currentWeapon.MagazineSize - _currentWeapon.CurrentRounds;
 

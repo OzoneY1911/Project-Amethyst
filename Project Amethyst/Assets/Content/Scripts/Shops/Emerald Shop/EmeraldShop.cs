@@ -1,6 +1,7 @@
 public class EmeraldShop : ShopController
 {
     private static MovementController _movementController => MovementController.Instance;
+    private static WeaponController _weaponController => WeaponController.Instance;
 
     private void Start()
     {
@@ -18,6 +19,10 @@ public class EmeraldShop : ShopController
                 case EmeraldSkill.MovementSpeed:
                     _playerShopCurrency.Remove(price);
                     _movementController.MovementModifier *= 1.5f;
+                    break;
+                case EmeraldSkill.ReloadSpeed:
+                    _playerShopCurrency.Remove(price);
+                    _weaponController.ReloadMultiplier *= 2;
                     break;
             }
         }

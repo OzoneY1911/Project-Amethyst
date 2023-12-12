@@ -34,6 +34,12 @@ public class PlayerHealth : SingletonMono<PlayerHealth>
     public void ChangeHealth(in int value)
     {
         _health += value;
+
+        if (_health > _maxHealth)
+        {
+            _health = _maxHealth;
+        }
+
         UpdateHealthBar();
 
         if (CheckIfDead())
@@ -55,6 +61,8 @@ public class PlayerHealth : SingletonMono<PlayerHealth>
 
     private void Die()
     {
+        DeathReport.Instance.UpdateReport();
+
         _inputManager.DisableInput();
 
         _deathScreen.GetComponent<FadeCanvasGroup>().ShowCanvas();
