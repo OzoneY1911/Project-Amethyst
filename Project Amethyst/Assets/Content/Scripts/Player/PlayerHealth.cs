@@ -7,6 +7,7 @@ public class PlayerHealth : SingletonMono<PlayerHealth>
 
     [SerializeField] private Slider _healthBar;
     [SerializeField] private GameObject _deathScreen;
+    [SerializeField] private GameObject _hurtScreen;
 
     private int _health;
     private int _maxHealth = 100;
@@ -33,6 +34,12 @@ public class PlayerHealth : SingletonMono<PlayerHealth>
 
     public void ChangeHealth(in int value)
     {
+        if (value < 0)
+        {
+            _hurtScreen.GetComponent<CanvasGroup>().alpha = 1f;
+            _hurtScreen.GetComponent<FadeCanvasGroup>().HideCanvas();
+        }
+
         _health += value;
 
         if (_health > _maxHealth)
@@ -59,7 +66,7 @@ public class PlayerHealth : SingletonMono<PlayerHealth>
         return false;
     }
 
-    private void Die()
+    public void Die()
     {
         DeathReport.Instance.UpdateReport();
 

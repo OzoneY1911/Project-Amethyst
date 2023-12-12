@@ -17,6 +17,7 @@ public class EnemyAI : MonoBehaviour
     private Animator _animator;
     private LayerMask _destructibleLayer;
     private LayerMask _playerLayer;
+    private LayerMask _targetLayer ;
 
     private bool _infiltrate;
     private bool _playerDetected;
@@ -48,6 +49,7 @@ public class EnemyAI : MonoBehaviour
 
         _destructibleLayer = 1 << LayerMask.NameToLayer("Destructible");
         _playerLayer = 1 << LayerMask.NameToLayer("Player");
+        _playerLayer = 1 << LayerMask.NameToLayer("Target");
 
         _target = GameObject.FindWithTag("Target").transform;
         _player = GameObject.FindWithTag("Player").transform;
@@ -116,6 +118,7 @@ public class EnemyAI : MonoBehaviour
     private void ChaseTarget()
     {
         float distance = (_player.transform.position - transform.position).sqrMagnitude;
+        float targetDistance = (_target.transform.position - transform.position).sqrMagnitude;
 
         if (distance < _checkRange * _checkRange)
         {
@@ -123,7 +126,14 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            _agent.SetDestination(_target.position);
+            if (targetDistance < _attackRange * _attackRange)
+            {
+                Attack(_target.transform, _targetLayer);
+            }
+            else
+            {
+                _agent.SetDestination(_target.position);
+            }
         }
     }
 
@@ -162,6 +172,10 @@ public class EnemyAI : MonoBehaviour
         else if (layerMask == _destructibleLayer)
         {
             _animator.SetTrigger("Ram");
+        }
+        else if (layerMask == _targetLayer)
+        {
+            _animator.SetTrigger("RamTarget");
         }
 
         yield return new WaitForSeconds(3f);

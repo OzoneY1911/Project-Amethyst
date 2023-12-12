@@ -13,4 +13,9 @@ public class EnemyEventHandler : MonoBehaviour
     {
         PlayerHealth.Instance.ChangeHealth(-_enemyAI.Enemy.Damage);
     }
+
+    private void EventRamTarget()
+    {
+        TargetStructure.Instance.Break(_enemyAI.Enemy.Damage);
+    }
 }

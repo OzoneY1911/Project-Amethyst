@@ -512,7 +512,7 @@ MonoBehaviour:
   _target: {fileID: 0}
   _initCheck: 10
   _checkRange: 8
-  _attackRange: 2
+  _attackRange: 3
   Enemy: {fileID: 11400000, guid: 5a7af9d7161cda2498a405e904c43c4d, type: 2}
 --- !u!114 &-8356011632834669861
 MonoBehaviour:
