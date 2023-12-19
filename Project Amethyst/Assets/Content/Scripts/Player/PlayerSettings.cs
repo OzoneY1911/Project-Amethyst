@@ -31,5 +31,6 @@ public static class PlayerSettings
         if (!data) return;
 
         data.msaaSampleCount = PlayerPrefs.GetInt("MSAA");
+        QualitySettings.anisotropicFiltering = (AnisotropicFiltering)PlayerPrefs.GetInt("Aniso");
     }
 }

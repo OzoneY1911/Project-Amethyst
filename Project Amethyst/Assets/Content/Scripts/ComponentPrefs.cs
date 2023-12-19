@@ -6,7 +6,8 @@ public abstract class ComponentPrefs : MonoBehaviour
     {
         Integer,
         Floating,
-        Text
+        Text,
+        Boolean
     }
 
     [SerializeField] protected ValueType _valueType;
