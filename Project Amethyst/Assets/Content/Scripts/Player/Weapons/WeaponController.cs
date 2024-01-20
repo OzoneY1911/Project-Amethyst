@@ -12,8 +12,14 @@ public class WeaponController : SingletonMono<WeaponController>
     private bool _reloading;
     private bool _fullReload;
 
-    public int ReloadMultiplier = 1;
     public int DamageMultiplier = 1;
+    public float ReloadMultiplier = 1f;
+    public float DrawHolsterMultiplier = 1f;
+
+    protected void Start()
+    {
+        _currentWeaponObject.GetComponentInChildren<ParticleSystem>().Stop();
+    }
 
     #region Shooting
 
@@ -30,6 +36,8 @@ public class WeaponController : SingletonMono<WeaponController>
             _currentWeaponObject.GetComponent<Animator>().SetTrigger("Last Shot");
             _currentWeaponObject.GetComponent<Animator>().SetBool("Loaded", false);
         }
+
+        _currentWeaponObject.GetComponentInChildren<ParticleSystem>().Play();
 
         _currentWeapon.CurrentRounds--;
 
@@ -51,6 +59,8 @@ public class WeaponController : SingletonMono<WeaponController>
 
         yield return new WaitForSeconds(60f / _currentWeapon.Rate);
 
+        _currentWeaponObject.GetComponentInChildren<ParticleSystem>().Stop();
+
         _currentWeapon.CanShoot = true;
     }
 
@@ -62,6 +72,8 @@ public class WeaponController : SingletonMono<WeaponController>
 
     public void Reload()
     {
+        _currentWeaponObject.GetComponent<Animator>().SetFloat("Reload Speed", ReloadMultiplier);
+
         if (_reloading)
         {
             StopCoroutine(_reloadCoroutine);

@@ -22,7 +22,11 @@ public class EmeraldShop : ShopController
                     break;
                 case EmeraldSkill.ReloadSpeed:
                     _playerShopCurrency.Remove(price);
-                    _weaponController.ReloadMultiplier *= 2;
+                    _weaponController.ReloadMultiplier *= 1.5f;
+                    break;
+                case EmeraldSkill.DrawHolsterSpeed:
+                    _playerShopCurrency.Remove(price);
+                    _weaponController.DrawHolsterMultiplier *= 2f;
                     break;
             }
         }

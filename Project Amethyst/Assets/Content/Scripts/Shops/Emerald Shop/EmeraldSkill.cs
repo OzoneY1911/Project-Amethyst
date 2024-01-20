@@ -2,5 +2,6 @@
 public enum EmeraldSkill
 {
     MovementSpeed = 50,
-    ReloadSpeed = 75
+    ReloadSpeed = 75,
+    DrawHolsterSpeed = 100
 }
