@@ -6,7 +6,7 @@ public class DestructibleFence : MonoBehaviour
 {
     private static InputManager _inputManager => InputManager.Instance;
 
-    [SerializeField] private float _health;
+    [SerializeField] private float _health = 100f;
 
     public float Health { get { return _health; } }
 
@@ -25,8 +25,6 @@ public class DestructibleFence : MonoBehaviour
 
     private void Awake()
     {
-        _health = _maxHealth;
-
         Obstacle = GetComponent<NavMeshObstacle>();
     }
 

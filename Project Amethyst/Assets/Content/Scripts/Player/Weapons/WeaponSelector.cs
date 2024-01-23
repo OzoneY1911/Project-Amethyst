@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class WeaponSelector : SingletonMono<WeaponSelector>
 {
+    protected static GameObject _currentWeaponObject => WeaponSelector.Instance.CurrentWeaponObject;
+    private static WeaponController _weaponController => WeaponController.Instance;
+
     [Header("Weapon Holders")]
     [SerializeField] private Transform _pistolHolder;
     [SerializeField] private Transform _shotgunHolder;
@@ -64,6 +67,8 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
 
     public void Draw(in WeaponSO weapon, in GameObject weaponObject)
     {
+        CurrentWeaponObject.GetComponent<Animator>().SetFloat("Draw Holster Speed", _weaponController.DrawHolsterMultiplier);
+
         if (CurrentWeaponObject != null)
         {
             CurrentWeaponObject.SetActive(false);
@@ -86,6 +91,8 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
 
     public void Holster()
     {
+        CurrentWeaponObject.GetComponent<Animator>().SetFloat("Draw Holster Speed", _weaponController.DrawHolsterMultiplier);
+
         CurrentWeaponObject.GetComponent<Animator>().SetTrigger("Holster");
 
         StartCoroutine(DrawHolsterCooldown(false));
@@ -93,7 +100,7 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
 
     private IEnumerator DrawHolsterCooldown(bool draw)
     {
-        yield return new WaitForSeconds(CurrentWeapon.TimeDraw);
+        yield return new WaitForSeconds(CurrentWeapon.TimeDraw / _weaponController.DrawHolsterMultiplier);
 
         if (draw)
         {
