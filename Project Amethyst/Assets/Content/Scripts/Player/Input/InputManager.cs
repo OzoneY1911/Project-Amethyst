@@ -82,6 +82,19 @@ public class InputManager : SingletonMono<InputManager>
         return _playerControls.UI.CloseUI.IsPressed();
     }
 
+    public bool GetUILeft()
+    {
+        return _playerControls.UI.Left.WasPressedThisFrame();
+    }
+    public bool GetUIUp()
+    {
+        return _playerControls.UI.Up.WasPressedThisFrame();
+    }
+    public bool GetUIRight()
+    {
+        return _playerControls.UI.Right.WasPressedThisFrame();
+    }
+
     #endregion
 
     #region Movement Input

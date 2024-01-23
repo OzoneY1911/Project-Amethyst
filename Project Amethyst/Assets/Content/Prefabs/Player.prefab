@@ -413,7 +413,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 295392220544307010}
   m_Lens:
-    FieldOfView: 65
+    FieldOfView: 62
     OrthographicSize: 10
     NearClipPlane: 0.01
     FarClipPlane: 5000
@@ -969,7 +969,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbadf02b347c1c74c9951787e646054e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cashCounter: {fileID: 0}
   _rubyCounter: {fileID: 0}
   _emeraldCounter: {fileID: 0}
   _sapphireCounter: {fileID: 0}
@@ -1531,7 +1530,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 295392220544307010}
   m_Lens:
-    FieldOfView: 65
+    FieldOfView: 64
     OrthographicSize: 10
     NearClipPlane: 0.01
     FarClipPlane: 5000

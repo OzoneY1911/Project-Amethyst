@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class IdleMovementState : MovementState
 {
     public override void Enter()
