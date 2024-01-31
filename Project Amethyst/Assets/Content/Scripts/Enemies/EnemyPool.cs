@@ -5,6 +5,7 @@ using UnityEngine.Pool;
 
 public class EnemyPool : SingletonMono<EnemyPool>
 {
+
     [Header("Pool Info")]
     [SerializeField] private int _defaultPoolSize;
     [SerializeField] private int _maxPoolSize;
@@ -33,7 +34,7 @@ public class EnemyPool : SingletonMono<EnemyPool>
         }
     }
 
-    private GameObject CreateEnemy()
+    public GameObject CreateEnemy()
     {
         GameObject enemyClone = Instantiate(_enemyPrefab, _spawnPoint[Random.Range(0, _spawnPoint.Count - 1)].position, _enemyPrefab.transform.rotation);
         return enemyClone;

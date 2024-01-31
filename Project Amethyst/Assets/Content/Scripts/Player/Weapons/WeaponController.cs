@@ -37,7 +37,10 @@ public class WeaponController : SingletonMono<WeaponController>
             _currentWeaponObject.GetComponent<Animator>().SetBool("Loaded", false);
         }
 
-        _currentWeaponObject.GetComponentInChildren<ParticleSystem>().Play();
+        if (_currentWeaponObject.GetComponentInChildren<ParticleSystem>() != null)
+        {
+            _currentWeaponObject.GetComponentInChildren<ParticleSystem>().Play();
+        }
 
         _currentWeapon.CurrentRounds--;
 
@@ -59,7 +62,10 @@ public class WeaponController : SingletonMono<WeaponController>
 
         yield return new WaitForSeconds(60f / _currentWeapon.Rate);
 
-        _currentWeaponObject.GetComponentInChildren<ParticleSystem>().Stop();
+        if (_currentWeaponObject.GetComponentInChildren<ParticleSystem>() != null)
+        {
+            _currentWeaponObject.GetComponentInChildren<ParticleSystem>().Stop();
+        }
 
         _currentWeapon.CanShoot = true;
     }
@@ -133,14 +139,12 @@ public class WeaponController : SingletonMono<WeaponController>
                     _currentWeapon.CurrentReserve -= roundsLacking;
                     _currentWeapon.CurrentRounds = _currentWeapon.MagazineSize;
                 }
-                Debug.Log("Part Reload");
             }
             else
             {
                 // Reload_Full
                 _currentWeapon.CurrentReserve -= roundsLacking;
                 _currentWeapon.CurrentRounds = _currentWeapon.MagazineSize;
-                Debug.Log("Full Reload");
             }
         }
         // Insufficient ammo in reserve
@@ -149,7 +153,6 @@ public class WeaponController : SingletonMono<WeaponController>
             // Load last ammo from reserve
             _currentWeapon.CurrentRounds += _currentWeapon.CurrentReserve;
             _currentWeapon.CurrentReserve = 0;
-            Debug.Log("Last ammo loaded");
         }
 
         _currentWeapon.CanShoot = true;

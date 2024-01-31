@@ -18,6 +18,7 @@ public class SapphireShop : ShopController
                 case SapphireSkill.MaxHealth:
                     _playerShopCurrency.Remove(price);
                     _playerHealth.MaxHealth *= 2;
+                    _buttonList[0].interactable = false;
                     break;
                 case SapphireSkill.RestoreHealth:
                     _playerShopCurrency.Remove(price);

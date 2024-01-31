@@ -7,9 +7,4 @@ public class MenuController : SingletonMono<MenuController>
         base.Awake();
         
     }
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
 }

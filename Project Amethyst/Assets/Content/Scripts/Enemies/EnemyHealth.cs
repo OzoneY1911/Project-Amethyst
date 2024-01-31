@@ -22,6 +22,11 @@ public class EnemyHealth : EntityHealth
 
     protected override void Die()
     {
+        if (KillCounter.Instance.Counter % 5 == 0)
+        {
+            EnemyPool.Instance.CreateEnemy();
+        }
+
         if (!_vanishing)
         {
             KillCounter.Instance.UpdateCounter();
@@ -42,7 +47,7 @@ public class EnemyHealth : EntityHealth
     {
         _vanishing = true;
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(20f);
         EnemyPool.Instance.Release(gameObject);
         EnemyPool.Instance.Get(gameObject);
 

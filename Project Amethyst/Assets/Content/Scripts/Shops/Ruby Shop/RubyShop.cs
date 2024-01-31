@@ -19,6 +19,7 @@ public class RubyShop : ShopController
                 case RubySkill.DamageBoost:
                     _playerShopCurrency.Remove(price);
                     _weaponController.DamageMultiplier *= 2;
+                    _buttonList[0].interactable = false;
                     break;
                 case RubySkill.RestoreAmmo:
                     _playerShopCurrency.Remove(price);

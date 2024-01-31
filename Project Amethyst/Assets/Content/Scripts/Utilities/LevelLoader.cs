@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-using static UnityEngine.Rendering.HDROutputUtils;
 
 public class LevelLoader : SingletonMono<LevelLoader>
 {
@@ -27,6 +26,11 @@ public class LevelLoader : SingletonMono<LevelLoader>
         {
             StartCoroutine(Load(name));
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     private IEnumerator LoadAsync(string name)

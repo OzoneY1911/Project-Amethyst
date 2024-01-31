@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class ShopController : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public abstract class ShopController : MonoBehaviour
 
     [SerializeField] private CanvasGroup _shopCanvasGroup;
     [SerializeField] protected CanvasGroup _failedCanvasGroup;
+
+    [SerializeField] private GameObject _chestTop;
+
+    [SerializeField] private float _openSpeed = 75f;
+
+    [SerializeField] protected Button[] _buttonList;
 
     private bool _canOpen;
     private bool _shopOpen;
@@ -37,6 +44,18 @@ public abstract class ShopController : MonoBehaviour
             if (_inputManager.GetUIClose() || _inputManager.GetUIEscape())
             {
                 CloseShop();
+            }
+
+            if (_chestTop.transform.localRotation.x > -0.9)
+            {
+                _chestTop.transform.Rotate(new Vector3(-_openSpeed * Time.deltaTime * 2, 0.0f, 0.0f));
+            }
+        }
+        else
+        {
+            if (_chestTop.transform.localRotation.x < 0)
+            {
+                _chestTop.transform.Rotate(new Vector3(_openSpeed * Time.deltaTime * 2, 0.0f, 0.0f));
             }
         }
     }
@@ -69,6 +88,8 @@ public abstract class ShopController : MonoBehaviour
         _shopCanvasGroup.GetComponent<FadeCanvasGroup>().ShowCanvas();
 
         _interactHint.GetComponent<FadeCanvasGroup>().HideCanvas();
+
+
     }
 
     public void CloseShop()
