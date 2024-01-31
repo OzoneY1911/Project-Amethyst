@@ -17,7 +17,7 @@ MonoBehaviour:
   Type: 0
   IsAutomatic: 0
   RoundInChamber: 1
-  Damage: 50
+  Damage: 40
   Rate: 600
   Range: 10
   ReloadTime: 3
@@ -27,6 +27,6 @@ MonoBehaviour:
   TimeDraw: 1
   TimeReloadPart: 0
   TimeReloadFull: 0
-  CurrentRounds: 0
-  CurrentReserve: 0
+  CurrentRounds: 8
+  CurrentReserve: 32
   CanShoot: 1

@@ -28,9 +28,12 @@ public abstract class MovementState : IState
     {
         if (SceneManager.GetActiveScene().name != "TutorialLevel")
         {
-            if (WeaponSelector.Instance.CurrentWeaponObject.GetComponent<Animator>().GetFloat("Movement Blend") != target)
+            if (WeaponSelector.Instance.CurrentWeaponObject.GetComponent<Animator>() != null)
             {
-                WeaponSelector.Instance.CurrentWeaponObject.GetComponent<Animator>().SetFloat("Movement Blend", target, speed, Time.deltaTime);
+                if (WeaponSelector.Instance.CurrentWeaponObject.GetComponent<Animator>().GetFloat("Movement Blend") != target)
+                {
+                    WeaponSelector.Instance.CurrentWeaponObject.GetComponent<Animator>().SetFloat("Movement Blend", target, speed, Time.deltaTime);
+                }
             }
         }
     }

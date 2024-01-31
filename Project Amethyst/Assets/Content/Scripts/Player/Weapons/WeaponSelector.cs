@@ -9,13 +9,13 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
 
     [Header("Weapon Holders")]
     [SerializeField] private Transform _pistolHolder;
-    [SerializeField] private Transform _shotgunHolder;
-    [SerializeField] private Transform _rifleHolder;
+    public Transform ShotgunHolder;
+    public Transform RifleHolder;
 
     [Header("Weapon Lists")]
     [SerializeField] private List<WeaponSO> _pistolList = new List<WeaponSO>();
-    [SerializeField] private List<WeaponSO> _shotgunList = new List<WeaponSO>();
-    [SerializeField] private List<WeaponSO> _rifleList = new List<WeaponSO>();
+    public List<WeaponSO> ShotgunList = new List<WeaponSO>();
+    public List<WeaponSO> RifleList = new List<WeaponSO>();
 
     public GameObject CurrentWeaponObject;
     public GameObject NextWeaponObject;
@@ -38,21 +38,12 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
         CurrentPistol = _pistolList[0];
         Equip(CurrentPistol, _pistolHolder, out PistolObject);
         Draw(CurrentPistol, PistolObject);
-
-        // TEST -----------------------------------------
-
-        CurrentShotgun = _shotgunList[0];
-        Equip(CurrentShotgun, _shotgunHolder, out ShotgunObject);
-        CurrentRifle = _rifleList[0];
-        Equip(CurrentRifle, _rifleHolder, out RifleObject);
-
-        CurrentPistol.CurrentReserve = CurrentPistol.DefaultReserve;
-        CurrentShotgun.CurrentReserve = CurrentShotgun.DefaultReserve;
-        CurrentRifle.CurrentReserve = CurrentRifle.DefaultReserve;
     }
 
     public void Equip(in WeaponSO gun, in Transform holder, out GameObject gunObject)
     {
+        gun.CurrentReserve = gun.DefaultReserve;
+        gun.CurrentRounds = gun.MagazineSize;
         gunObject = Instantiate(gun.Prefab, holder);
         if (gunObject.activeSelf)
         {
@@ -67,7 +58,10 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
 
     public void Draw(in WeaponSO weapon, in GameObject weaponObject)
     {
-        CurrentWeaponObject.GetComponent<Animator>().SetFloat("Draw Holster Speed", _weaponController.DrawHolsterMultiplier);
+        if (CurrentWeaponObject.GetComponent<Animator>() != null)
+        {
+            CurrentWeaponObject.GetComponent<Animator>().SetFloat("Draw Holster Speed", _weaponController.DrawHolsterMultiplier);
+        }
 
         if (CurrentWeaponObject != null)
         {
@@ -77,13 +71,16 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
         CurrentWeaponObject = weaponObject;
         CurrentWeaponObject.SetActive(true);
 
-        if (CurrentWeapon.CurrentRounds > 0)
+        if (CurrentWeaponObject.GetComponent<Animator>() != null)
         {
-            CurrentWeaponObject.GetComponent<Animator>().SetBool("Loaded", true);
-        }
-        else
-        {
-            CurrentWeaponObject.GetComponent<Animator>().SetBool("Loaded", false);
+            if (CurrentWeapon.CurrentRounds > 0)
+            {
+                CurrentWeaponObject.GetComponent<Animator>().SetBool("Loaded", true);
+            }
+            else
+            {
+                CurrentWeaponObject.GetComponent<Animator>().SetBool("Loaded", false);
+            }
         }
 
         StartCoroutine(DrawHolsterCooldown(true));
@@ -91,9 +88,13 @@ public class WeaponSelector : SingletonMono<WeaponSelector>
 
     public void Holster()
     {
-        CurrentWeaponObject.GetComponent<Animator>().SetFloat("Draw Holster Speed", _weaponController.DrawHolsterMultiplier);
 
-        CurrentWeaponObject.GetComponent<Animator>().SetTrigger("Holster");
+        if (CurrentWeaponObject.GetComponent<Animator>() != null)
+        {
+            CurrentWeaponObject.GetComponent<Animator>().SetFloat("Draw Holster Speed", _weaponController.DrawHolsterMultiplier);
+
+            CurrentWeaponObject.GetComponent<Animator>().SetTrigger("Holster");
+        }
 
         StartCoroutine(DrawHolsterCooldown(false));
     }

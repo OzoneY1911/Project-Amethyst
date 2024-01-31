@@ -17,13 +17,16 @@ MonoBehaviour:
   Type: 2
   IsAutomatic: 1
   RoundInChamber: 1
-  Damage: 30
+  Damage: 20
   Rate: 800
   Range: 10
   ReloadTime: 3
   MagazineSize: 30
   DefaultReserve: 90
   MaxReserve: 180
-  CurrentRounds: 0
+  TimeDraw: 0
+  TimeReloadPart: 0
+  TimeReloadFull: 0
+  CurrentRounds: 30
   CurrentReserve: 90
   CanShoot: 1

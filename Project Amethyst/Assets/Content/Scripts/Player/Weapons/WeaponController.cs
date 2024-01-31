@@ -27,14 +27,17 @@ public class WeaponController : SingletonMono<WeaponController>
 
     public void Shoot()
     {
-        if (_currentWeapon.CurrentRounds != 1)
+        if (_currentWeaponObject.GetComponent<Animator>() != null)
         {
-            _currentWeaponObject.GetComponent<Animator>().SetTrigger("Shot");
-        }
-        else
-        {
-            _currentWeaponObject.GetComponent<Animator>().SetTrigger("Last Shot");
-            _currentWeaponObject.GetComponent<Animator>().SetBool("Loaded", false);
+            if (_currentWeapon.CurrentRounds != 1)
+            {
+                _currentWeaponObject.GetComponent<Animator>().SetTrigger("Shot");
+            }
+            else
+            {
+                _currentWeaponObject.GetComponent<Animator>().SetTrigger("Last Shot");
+                _currentWeaponObject.GetComponent<Animator>().SetBool("Loaded", false);
+            }
         }
 
         if (_currentWeaponObject.GetComponentInChildren<ParticleSystem>() != null)
@@ -78,7 +81,10 @@ public class WeaponController : SingletonMono<WeaponController>
 
     public void Reload()
     {
-        _currentWeaponObject.GetComponent<Animator>().SetFloat("Reload Speed", ReloadMultiplier);
+        if (_currentWeaponObject.GetComponent<Animator>() != null)
+        {
+            _currentWeaponObject.GetComponent<Animator>().SetFloat("Reload Speed", ReloadMultiplier);
+        }
 
         if (_reloading)
         {
@@ -117,7 +123,10 @@ public class WeaponController : SingletonMono<WeaponController>
         _reloading = true;
         _currentWeapon.CanShoot = false;
 
-        _currentWeaponObject.GetComponent<Animator>().SetTrigger("Reload");
+        if (_currentWeaponObject.GetComponent<Animator>() != null)
+        {
+            _currentWeaponObject.GetComponent<Animator>().SetTrigger("Reload");
+        }
 
         yield return new WaitForSeconds(_currentWeapon.ReloadTime / ReloadMultiplier);
 

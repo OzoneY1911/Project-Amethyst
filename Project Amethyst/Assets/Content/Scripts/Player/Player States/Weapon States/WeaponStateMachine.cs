@@ -138,13 +138,13 @@ public class WeaponStateMachine : SingletonMono<WeaponStateMachine>, IStateMachi
             _nextWeaponObject = _weaponSelector.PistolObject;
             TransitionTo(WeaponHolster);
         }
-        else if (_inputManager.GetPlayerDrawShotgun() && _currentWeapon.Type != WeaponType.Shotgun)
+        else if (_inputManager.GetPlayerDrawShotgun() && _currentWeapon.Type != WeaponType.Shotgun && _weaponSelector.CurrentShotgun != null)
         {
             _nextWeapon = _weaponSelector.CurrentShotgun;
             _nextWeaponObject = _weaponSelector.ShotgunObject;
             TransitionTo(WeaponHolster);
         }
-        else if (_inputManager.GetPlayerDrawRifle() && _currentWeapon.Type != WeaponType.Rifle)
+        else if (_inputManager.GetPlayerDrawRifle() && _currentWeapon.Type != WeaponType.Rifle && _weaponSelector.CurrentRifle != null)
         {
             _nextWeapon = _weaponSelector.CurrentRifle;
             _nextWeaponObject = _weaponSelector.RifleObject;
