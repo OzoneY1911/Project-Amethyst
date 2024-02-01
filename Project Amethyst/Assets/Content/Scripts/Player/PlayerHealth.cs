@@ -68,6 +68,7 @@ public class PlayerHealth : SingletonMono<PlayerHealth>
 
     public void Die()
     {
+        Leaderboard.Instance.UpdateBoard();
         DeathReport.Instance.UpdateReport();
 
         _inputManager.DisableInput();
