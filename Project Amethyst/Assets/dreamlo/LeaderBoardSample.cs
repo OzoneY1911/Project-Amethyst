@@ -22,7 +22,7 @@ public class LeaderBoardSample : MonoBehaviour {
 	// Reference to the dreamloLeaderboard prefab in the scene
 	
 	dreamloLeaderBoard dl;
-	dreamloPromoCode pc;
+	//dreamloPromoCode pc;
 
 	void Start () 
 	{
@@ -30,7 +30,7 @@ public class LeaderBoardSample : MonoBehaviour {
 		this.dl = dreamloLeaderBoard.GetSceneDreamloLeaderboard();
 
 		// get the other reference here
-		this.pc = dreamloPromoCode.GetSceneDreamloPromoCode();
+		//this.pc = dreamloPromoCode.GetSceneDreamloPromoCode();
 
 		this.timeLeft = startTime;
 		this.gs = gameState.waiting;
@@ -126,19 +126,19 @@ public class LeaderBoardSample : MonoBehaviour {
 		GUILayout.Label("Redeem Code: ");
 		this.code = GUILayout.TextField(this.code, width200);
 		
-		if (GUILayout.Button("Redeem"))
+		/*if (GUILayout.Button("Redeem"))
 		{
 			this.pc.RedeemCode(this.code);
-		}
+		}*/
 		GUILayout.EndHorizontal();
 
 		GUILayout.Space(50);
-		if (this.pc != null)
+		/*if (this.pc != null)
 		{
 			GUILayout.Label("State: " + this.pc.state.ToString());
 			GUILayout.Label("Error: " + this.pc.error);
 			GUILayout.Label("Value: " + this.pc.value);
-		}
+		}*/
 
 		GUILayout.EndVertical();
 		GUILayout.EndArea();
