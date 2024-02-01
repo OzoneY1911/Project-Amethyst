@@ -8147,7 +8147,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 90}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &714952824
 MonoBehaviour:
@@ -23531,7 +23531,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.1501869, g: 0.4245283, b: 0.32563782, a: 1}
     m_PressedColor: {r: 0.3254902, g: 1, b: 0.7568628, a: 1}
     m_SelectedColor: {r: 0.14901961, g: 0.42352945, b: 0.3254902, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.2
   m_SpriteState:
@@ -23560,6 +23560,42 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2016396471}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1631291232}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 714952824}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Your score was submitted!
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2016396472
@@ -24983,7 +25019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c992f22005edb34291b39b864e49f41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 50
+  SkillName: 100
 --- !u!1001 &2133167579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26579,6 +26615,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1536672290}
+    - target: {fileID: 2787395002234906113, guid: 8e83689a259bc83448e910e99c77d56e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
     - target: {fileID: 4687895508504089746, guid: 8e83689a259bc83448e910e99c77d56e,
         type: 3}
       propertyPath: m_Pivot.x
@@ -26761,9 +26802,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7949381496146219637, guid: 8e83689a259bc83448e910e99c77d56e,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949381496146219637, guid: 8e83689a259bc83448e910e99c77d56e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949381496146219637, guid: 8e83689a259bc83448e910e99c77d56e,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1984895747230126910}
+    - target: {fileID: 7949381496146219637, guid: 8e83689a259bc83448e910e99c77d56e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949381496146219637, guid: 8e83689a259bc83448e910e99c77d56e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949381496146219637, guid: 8e83689a259bc83448e910e99c77d56e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenuController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949381496146219637, guid: 8e83689a259bc83448e910e99c77d56e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8281971852135837612, guid: 8e83689a259bc83448e910e99c77d56e,
         type: 3}
       propertyPath: m_AnchorMax.y

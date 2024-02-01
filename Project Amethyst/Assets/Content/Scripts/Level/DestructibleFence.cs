@@ -12,6 +12,8 @@ public class DestructibleFence : MonoBehaviour
 
     private float _maxHealth = 100;
 
+    private int _repairReward;
+
     [SerializeField] private CanvasGroup _interactHint;
     [SerializeField] private CanvasGroup _healthBar;
     [SerializeField] private Slider _healthFill;
@@ -112,6 +114,14 @@ public class DestructibleFence : MonoBehaviour
     private void Repair()
     {
         _health += 0.5f;
+
+        _repairReward++;
+        if (_repairReward == 5)
+        {
+            PlayerCurrency.Instance.Add(PlayerCurrency.Instance.Ruby, 1);
+            PlayerCurrency.Instance.Add(PlayerCurrency.Instance.Sapphire, 1);
+            _repairReward = 0;
+        }
 
         if (_health >= _maxHealth)
         {

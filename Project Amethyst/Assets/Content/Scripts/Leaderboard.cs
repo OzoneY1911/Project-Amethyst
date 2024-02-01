@@ -10,6 +10,8 @@ public class Leaderboard : SingletonMono<Leaderboard>
     [SerializeField] private GameObject _row;
     [SerializeField] private Transform _column;
 
+    private Coroutine _updateCoroutine;
+
     protected override void Awake()
     {
         base.Awake();
@@ -17,7 +19,7 @@ public class Leaderboard : SingletonMono<Leaderboard>
 
     public void UpdateBoard()
     {
-        StartCoroutine(Download());
+        _updateCoroutine = StartCoroutine(Download());
     }
 
     private IEnumerator Download()
