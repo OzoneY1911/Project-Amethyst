@@ -4184,7 +4184,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -673}
-  m_SizeDelta: {x: 1000, y: 200}
+  m_SizeDelta: {x: 1050, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1144135675
 MonoBehaviour:
@@ -4206,7 +4206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Who will you give this?
+  m_text: Who will you give it to?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05eb80cc81ed92d4fae78ae51b4a1445, type: 2}
   m_sharedMaterial: {fileID: -2637414002872269087, guid: 05eb80cc81ed92d4fae78ae51b4a1445,
